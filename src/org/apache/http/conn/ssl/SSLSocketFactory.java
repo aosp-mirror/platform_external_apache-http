@@ -217,6 +217,19 @@ public class SSLSocketFactory implements LayeredSocketFactory {
     }
 
     /**
+     * Constructs an HttpClient SSLSocketFactory backed by the given JSSE
+     * SSLSocketFactory.
+     *
+     * @hide
+     */
+    public SSLSocketFactory(javax.net.ssl.SSLSocketFactory socketfactory) {
+        super();
+        this.sslcontext = null;
+        this.socketfactory = socketfactory;
+        this.nameResolver = null;
+    }
+
+    /**
      * Creates the default SSL socket factory.
      * This constructor is used exclusively to instantiate the factory for
      * {@link #getSocketFactory getSocketFactory}.
