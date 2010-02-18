@@ -44,7 +44,9 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.conn.OperatedClientConnection;
 import org.apache.http.conn.ClientConnectionOperator;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.scheme.LayeredSocketFactory;
+import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.scheme.SocketFactory;
@@ -67,6 +69,7 @@ import org.apache.http.conn.scheme.SocketFactory;
 public class DefaultClientConnectionOperator
     implements ClientConnectionOperator {
 
+    private static final PlainSocketFactory staticPlainSocketFactory = new PlainSocketFactory();
 
     /** The scheme registry for looking up socket factories. */
     protected SchemeRegistry schemeRegistry;
@@ -121,19 +124,55 @@ public class DefaultClientConnectionOperator
 
         final Scheme schm = schemeRegistry.getScheme(target.getSchemeName());
         final SocketFactory sf = schm.getSocketFactory();
+        final SocketFactory plain_sf;
+        final LayeredSocketFactory layered_sf;
+        if (sf instanceof LayeredSocketFactory) {
+            plain_sf = staticPlainSocketFactory;
+            layered_sf = (LayeredSocketFactory)sf;
+        } else {
+            plain_sf = sf;
+            layered_sf = null;
+        }
+        InetAddress[] addresses = InetAddress.getAllByName(target.getHostName());
 
-        Socket sock = sf.createSocket();
-        conn.opening(sock, target);
+        for (int i = 0; i < addresses.length; ++i) {
+            Socket sock = plain_sf.createSocket();
+            conn.opening(sock, target);
 
-        try {
-            sock = sf.connectSocket(sock, target.getHostName(),
+            try {
+                Socket connsock = plain_sf.connectSocket(sock,
+                    addresses[i].getHostAddress(),
                     schm.resolvePort(target.getPort()),
                     local, 0, params);
-        } catch (ConnectException ex) {
-            throw new HttpHostConnectException(target, ex);
+                if (sock != connsock) {
+                    sock = connsock;
+                    conn.opening(sock, target);
+                }
+                if (layered_sf != null) {
+                    Socket layeredsock = layered_sf.createSocket(sock,
+                        target.getHostName(),
+                        schm.resolvePort(target.getPort()),
+                        true);
+                    if (layeredsock != sock) {
+                        conn.opening(layeredsock, target);
+                    }
+                    prepareSocket(layeredsock, context, params);
+                    conn.openCompleted(sf.isSecure(layeredsock), params);
+                } else {
+                    prepareSocket(sock, context, params);
+                    conn.openCompleted(sf.isSecure(sock), params);
+                }
+                break;
+            } catch (ConnectException ex) {
+                if (i == addresses.length - 1) {
+                    throw new HttpHostConnectException(target, ex);
+                }
+            } catch (ConnectTimeoutException ex) {
+                if (i == addresses.length - 1) {
+                    throw ex;
+                }
+            }
         }
-        prepareSocket(sock, context, params);
-        conn.openCompleted(sf.isSecure(sock), params);
     } // openConnection
 
 
@@ -213,4 +252,3 @@ public class DefaultClientConnectionOperator
 
 
 } // class DefaultClientConnectionOperator
-
