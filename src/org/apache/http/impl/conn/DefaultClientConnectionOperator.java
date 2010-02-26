@@ -44,7 +44,6 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.conn.HttpHostConnectException;
 import org.apache.http.conn.OperatedClientConnection;
 import org.apache.http.conn.ClientConnectionOperator;
-import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.scheme.LayeredSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
@@ -122,33 +121,19 @@ public class DefaultClientConnectionOperator
 
         final Scheme schm = schemeRegistry.getScheme(target.getSchemeName());
         final SocketFactory sf = schm.getSocketFactory();
-        InetAddress[] addresses = InetAddress.getAllByName(target.getHostName());
 
-        for (int i = 0; i < addresses.length; ++i) {
-            Socket sock = sf.createSocket();
-            conn.opening(sock, target);
+        Socket sock = sf.createSocket();
+        conn.opening(sock, target);
 
-            try {
-                Socket connsock = sf.connectSocket(sock, addresses[i].getHostAddress(),
-                        schm.resolvePort(target.getPort()),
-                        local, 0, params);
-                if (sock != connsock) {
-                    sock = connsock;
-                    conn.opening(sock, target);
-                }
-                prepareSocket(sock, context, params);
-                conn.openCompleted(sf.isSecure(sock), params);
-                break;
-            } catch (ConnectException ex) {
-                if (i == addresses.length - 1) {
-                    throw new HttpHostConnectException(target, ex);
-                }
-            } catch (ConnectTimeoutException ex) {
-                if (i == addresses.length - 1) {
-                    throw ex;
-                }
-            }
+        try {
+            sock = sf.connectSocket(sock, target.getHostName(),
+                    schm.resolvePort(target.getPort()),
+                    local, 0, params);
+        } catch (ConnectException ex) {
+            throw new HttpHostConnectException(target, ex);
         }
+        prepareSocket(sock, context, params);
+        conn.openCompleted(sf.isSecure(sock), params);
     } // openConnection
 
 
@@ -228,3 +213,4 @@ public class DefaultClientConnectionOperator
 
 
 } // class DefaultClientConnectionOperator
+
