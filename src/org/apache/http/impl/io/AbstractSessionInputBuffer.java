@@ -238,10 +238,14 @@ public abstract class AbstractSessionInputBuffer implements SessionInputBuffer {
         int off = this.bufferpos;
         int len;
         this.bufferpos = pos + 1;
-        if (pos > 0 && this.buffer[pos - 1] == HTTP.CR) {
+        // BEGIN android-changed
+        // The first test below was fixed to not try to skip beyond the
+        // start of the live part of the buffer.
+        if (pos > off && this.buffer[pos - 1] == HTTP.CR) {
             // skip CR if found
             pos--;
         }
+        // END android-changed
         len = pos - off;
         if (this.ascii) {
             charbuffer.append(this.buffer, off, len);
