@@ -148,6 +148,18 @@ public class DefaultClientConnectionOperator
                     sock = connsock;
                     conn.opening(sock, target);
                 }
+                /*
+                 * prepareSocket is called on the just connected
+                 * socket before the creation of the layered socket to
+                 * ensure that desired socket options such as
+                 * TCP_NODELAY, SO_RCVTIMEO, SO_LINGER will be set
+                 * before any I/O is performed on the socket. This
+                 * happens in the common case as
+                 * SSLSocketFactory.createSocket performs hostname
+                 * verification which requires that SSL handshaking be
+                 * performed.
+                 */
+                prepareSocket(sock, context, params);
                 if (layered_sf != null) {
                     Socket layeredsock = layered_sf.createSocket(sock,
                         target.getHostName(),
@@ -156,10 +168,8 @@ public class DefaultClientConnectionOperator
                     if (layeredsock != sock) {
                         conn.opening(layeredsock, target);
                     }
-                    prepareSocket(layeredsock, context, params);
                     conn.openCompleted(sf.isSecure(layeredsock), params);
                 } else {
-                    prepareSocket(sock, context, params);
                     conn.openCompleted(sf.isSecure(sock), params);
                 }
                 break;
