@@ -131,8 +131,15 @@ public class DefaultHttpClient extends AbstractHttpClient {
                 HttpVersion.HTTP_1_1);
         HttpProtocolParams.setContentCharset(params, 
                 HTTP.DEFAULT_CONTENT_CHARSET);
+
+        /*
+         * Android note: Send each request body without first asking the server
+         * whether it will be accepted. Asking first slows down the common case
+         * and results in "417 expectation failed" errors when a HTTP/1.0 server
+         * is behind a proxy. http://b/2471595
+         */
         HttpProtocolParams.setUseExpectContinue(params, 
-                true);
+                false); // android-changed
 
         // determine the release version from packaged version info
         final VersionInfo vi = VersionInfo.loadVersionInfo
