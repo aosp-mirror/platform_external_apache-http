@@ -1,0 +1,9 @@
+# Copyright 2010 Google Inc. All Rights Reserved.
+#Fri Jul 16 10:03:08 PDT 2010
+currentVersion=4
+version=16/07/2008
+isNative=false
+name=apache_commons_httpcomponents
+keywords=apache commons httpcomponents
+onDevice=true
+homepage=http\://www.apache.org/dist/httpcomponents/httpclient/
