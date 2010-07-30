@@ -223,7 +223,7 @@ public class DefaultClientConnectionOperator
         final Socket sock; 
         try {
             sock = lsf.createSocket
-                (conn.getSocket(), target.getHostName(), target.getPort(), true);
+                (conn.getSocket(), target.getHostName(), schm.resolvePort(target.getPort()), true);
         } catch (ConnectException ex) {
             throw new HttpHostConnectException(target, ex);
         }
