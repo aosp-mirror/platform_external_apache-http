@@ -73,8 +73,9 @@ public class HttpRequestHandlerRegistry implements HttpRequestHandlerResolver {
     }
 
     /**
-     * @deprecated
+     * @deprecated use {@link UriPatternMatcher} directly
      */
+    @Deprecated
     protected boolean matchUriRequestPattern(final String pattern, final String requestUri) {
         return matcher.matchUriRequestPattern(pattern, requestUri);
     }
