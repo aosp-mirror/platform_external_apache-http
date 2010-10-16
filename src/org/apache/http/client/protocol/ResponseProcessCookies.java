@@ -124,13 +124,17 @@ public class ResponseProcessCookies implements HttpResponseInterceptor {
                         cookieStore.addCookie(cookie);
 
                         if (this.log.isDebugEnabled()) {
+                            // BEGIN android-changed
                             this.log.debug("Cookie accepted: \""
-                                    + cookie + "\". ");
+                                    + cookieToString(cookie) + "\". ");
+                            // END android-changed
                         }
                     } catch (MalformedCookieException ex) {
                         if (this.log.isWarnEnabled()) {
+                            // BEGIN android-changed
                             this.log.warn("Cookie rejected: \""
-                                    + cookie + "\". " + ex.getMessage());
+                                    + cookieToString(cookie) + "\". " + ex.getMessage());
+                            // END android-changed
                         }
                     }
                 }
@@ -142,5 +146,19 @@ public class ResponseProcessCookies implements HttpResponseInterceptor {
             }
         }
     }
-    
+
+    // BEGIN android-added
+    /**
+     * Don't log the cookie's value; that's potentially sensitive information.
+     */
+    private String cookieToString(Cookie cookie) {
+        return cookie.getClass().getSimpleName()
+                + "[version=" + cookie.getVersion()
+                + ",name=" + cookie.getName()
+                + ",domain=" + cookie.getDomain()
+                + ",path=" + cookie.getPath()
+                + ",expiry=" + cookie.getExpiryDate()
+                + "]";
+    }
+    // END android-added
 }
