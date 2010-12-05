@@ -346,7 +346,13 @@ public class DefaultRequestDirector implements RequestDirector {
                 // Reopen connection if needed
                 if (!managedConn.isOpen()) {
                     managedConn.open(route, context, params);
-                } 
+                }
+                // BEGIN android-added
+                else {
+                    // b/3241899 set the per request timeout parameter on reused connections
+                    managedConn.setSocketTimeout(HttpConnectionParams.getSoTimeout(params));
+                }
+                // END android-added
                 
                 try {
                     establishRoute(route, context);
