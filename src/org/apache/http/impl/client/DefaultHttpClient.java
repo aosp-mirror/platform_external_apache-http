@@ -61,7 +61,7 @@ import org.apache.http.cookie.CookieSpecRegistry;
 import org.apache.http.impl.DefaultConnectionReuseStrategy;
 import org.apache.http.impl.auth.BasicSchemeFactory;
 import org.apache.http.impl.auth.DigestSchemeFactory;
-import org.apache.http.impl.conn.DefaultHttpRoutePlanner;
+import org.apache.http.impl.conn.ProxySelectorRoutePlanner;
 import org.apache.http.impl.conn.SingleClientConnManager;
 import org.apache.http.impl.cookie.BestMatchSpecFactory;
 import org.apache.http.impl.cookie.BrowserCompatSpecFactory;
@@ -326,8 +326,10 @@ public class DefaultHttpClient extends AbstractHttpClient {
 
     @Override
     protected HttpRoutePlanner createHttpRoutePlanner() {
-        return new DefaultHttpRoutePlanner
-            (getConnectionManager().getSchemeRegistry());
+        // BEGIN android-changed
+        //     Use the proxy specified by system properties
+        return new ProxySelectorRoutePlanner(getConnectionManager().getSchemeRegistry(), null);
+        // END android-changed
     }
 
 

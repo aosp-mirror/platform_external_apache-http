@@ -51,6 +51,7 @@ import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 
 import org.apache.http.conn.params.ConnRouteParams;
+import org.apache.http.conn.params.ConnRoutePNames;
 
 
 /**
@@ -140,7 +141,18 @@ public class ProxySelectorRoutePlanner implements HttpRoutePlanner {
 
         final InetAddress local =
             ConnRouteParams.getLocalAddress(request.getParams());
-        final HttpHost proxy = determineProxy(target, request, context);
+
+        // BEGIN android-changed
+        //     If the client or request explicitly specifies a proxy (or no
+        //     proxy), prefer that over the ProxySelector's VM-wide default.
+        HttpHost proxy = (HttpHost) request.getParams().getParameter(ConnRoutePNames.DEFAULT_PROXY);
+        if (proxy == null) {
+            proxy = determineProxy(target, request, context);
+        } else if (ConnRouteParams.NO_HOST.equals(proxy)) {
+            // value is explicitly unset
+            proxy = null;
+        }
+        // END android-changed
 
         final Scheme schm =
             this.schemeRegistry.getScheme(target.getSchemeName());
