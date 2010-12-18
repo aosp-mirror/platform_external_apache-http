@@ -47,6 +47,7 @@ import org.apache.http.impl.entity.LaxContentLengthStrategy;
 import org.apache.http.impl.entity.StrictContentLengthStrategy;
 import org.apache.http.impl.io.HttpRequestWriter;
 import org.apache.http.impl.io.HttpResponseParser;
+import org.apache.http.impl.io.SocketInputBuffer;
 import org.apache.http.io.HttpMessageParser;
 import org.apache.http.io.HttpMessageWriter;
 import org.apache.http.io.SessionInputBuffer;
@@ -198,6 +199,12 @@ public abstract class AbstractHttpClientConnection implements HttpClientConnecti
             return true;
         }
         try {
+            // BEGIN android-added
+            //     don't reuse connections when the socket input stream is exhausted
+            if (inbuffer instanceof SocketInputBuffer) {
+                return ((SocketInputBuffer) inbuffer).isStale();
+            }
+            // END android-added
             this.inbuffer.isDataAvailable(1);
             return false;
         } catch (IOException ex) {
