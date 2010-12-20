@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.Socket;
 
+import java.net.SocketTimeoutException;
 import org.apache.http.params.HttpParams;
 
 
@@ -112,4 +113,30 @@ public class SocketInputBuffer extends AbstractSessionInputBuffer {
         return result;
     }    
         
+    // BEGIN android-added
+    /**
+     * Returns true if the connection is probably functional. It's insufficient
+     * to rely on isDataAvailable() returning normally; that approach cannot
+     * distinguish between an exhausted stream and a stream with zero bytes
+     * buffered.
+     *
+     * @hide
+     */
+    public boolean isStale() throws IOException {
+        if (hasBufferedData()) {
+            return false;
+        }
+        int oldTimeout = this.socket.getSoTimeout();
+        try {
+            this.socket.setSoTimeout(1);
+            return fillBuffer() == -1;
+        } catch (SocketTimeoutException e) {
+            return false; // the connection is not stale; hooray
+        } catch (IOException e) {
+            return true; // the connection is stale, the read or soTimeout failed.
+        } finally {
+            this.socket.setSoTimeout(oldTimeout);
+        }
+    }
+    // END android-added
 }
