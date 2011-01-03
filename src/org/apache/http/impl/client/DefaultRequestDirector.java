@@ -334,7 +334,18 @@ public class DefaultRequestDirector implements RequestDirector {
                         this.log.debug("Stale connection check");
                         if (managedConn.isStale()) {
                             this.log.debug("Stale connection detected");
-                            managedConn.close();
+                            // BEGIN android-changed
+                            try {
+                                managedConn.close();
+                            } catch (IOException ignored) {
+                                // SSLSocket's will throw IOException
+                                // because they can't send a "close
+                                // notify" protocol message to the
+                                // server. Just supresss any
+                                // exceptions related to closing the
+                                // stale connection.
+                            }
+                            // END android-changed
                         }
                     }
                 }
