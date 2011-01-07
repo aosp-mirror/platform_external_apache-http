@@ -67,6 +67,7 @@ import org.apache.http.client.RedirectHandler;
 import org.apache.http.client.UserTokenHandler;
 import org.apache.http.client.methods.AbortableHttpRequest;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.client.protocol.ClientContext;
@@ -575,8 +576,21 @@ public class DefaultRequestDirector implements RequestDirector {
                 ClientPNames.DEFAULT_HOST);
         }
         if (target == null) {
-            throw new IllegalStateException
-                ("Target host must not be null, or set in parameters.");
+            // BEGIN android-changed
+            //     If the URI was malformed, make it obvious where there's no host component
+            String scheme = null;
+            String host = null;
+            String path = null;
+            URI uri;
+            if (request instanceof HttpUriRequest
+                    && (uri = ((HttpUriRequest) request).getURI()) != null) {
+                scheme = uri.getScheme();
+                host = uri.getHost();
+                path = uri.getPath();
+            }
+            throw new IllegalStateException( "Target host must not be null, or set in parameters."
+                    + " scheme=" + scheme + ", host=" + host + ", path=" + path);
+            // END android-changed
         }
 
         return this.routePlanner.determineRoute(target, request, context);
