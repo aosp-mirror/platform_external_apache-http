@@ -163,7 +163,7 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
             // action.  It also can't be [*.co.uk] or [*.co.jp] or
             // [*.org.uk], etc...
             boolean doWildcard = cn.startsWith("*.") &&
-                                 cn.lastIndexOf('.') >= 0 &&
+                                 cn.indexOf('.', 2) != -1 &&
                                  acceptableCountryWildcard(cn) &&
                                  !InetAddressUtils.isIPv4Address(host);
 
