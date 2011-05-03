@@ -34,6 +34,7 @@ package org.apache.http.impl.io;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 import org.apache.http.params.HttpParams;
 
@@ -44,55 +45,31 @@ import org.apache.http.params.HttpParams;
  * @author <a href="mailto:oleg at ural.ru">Oleg Kalnichevski</a>
  *
  * @version $Revision: 560358 $
- * 
+ *
  * @since 4.0
  */
 public class SocketInputBuffer extends AbstractSessionInputBuffer {
 
-    static private final Class SOCKET_TIMEOUT_CLASS = SocketTimeoutExceptionClass();
-
-    /**
-     * Returns <code>SocketTimeoutExceptionClass<code> or <code>null</code> if the class
-     * does not exist.
-     * 
-     * @return <code>SocketTimeoutExceptionClass<code>, or <code>null</code> if unavailable.
-     */ 
-    static private Class SocketTimeoutExceptionClass() {
-        try {
-            return Class.forName("java.net.SocketTimeoutException");
-        } catch (ClassNotFoundException e) {
-            return null;
-        }
-    }
-
-    private static boolean isSocketTimeoutException(final InterruptedIOException e) {
-        if (SOCKET_TIMEOUT_CLASS != null) {
-            return SOCKET_TIMEOUT_CLASS.isInstance(e);
-        } else {
-            return true;
-        }
-    }
-    
     private final Socket socket;
-    
+
     public SocketInputBuffer(
-            final Socket socket, 
-            int buffersize, 
+            final Socket socket,
+            int buffersize,
             final HttpParams params) throws IOException {
         super();
         if (socket == null) {
             throw new IllegalArgumentException("Socket may not be null");
         }
         this.socket = socket;
-        if (buffersize < 0) {
-            buffersize = socket.getReceiveBufferSize();
-        }
-        if (buffersize < 1024) {
-            buffersize = 1024;
-        }
-        init(socket.getInputStream(), buffersize, params);
+        // BEGIN android-changed
+        // Workaround for http://b/3514259. We take 'buffersize' as a hint in
+        // the weakest sense, and always use an 8KiB heap buffer and leave the
+        // kernel buffer size alone, trusting the system to have set a
+        // network-appropriate default.
+        init(socket.getInputStream(), 8192, params);
+        // END android-changed
     }
-    
+
     public boolean isDataAvailable(int timeout) throws IOException {
         boolean result = hasBufferedData();
         if (!result) {
@@ -102,7 +79,7 @@ public class SocketInputBuffer extends AbstractSessionInputBuffer {
                 fillBuffer();
                 result = hasBufferedData();
             } catch (InterruptedIOException e) {
-                if (!isSocketTimeoutException(e)) {
+                if (!(e instanceof SocketTimeoutException)) {
                     throw e;
                 }
             } finally {
