@@ -31,7 +31,10 @@
 
 package org.apache.http.impl.conn;
 
+import dalvik.system.BlockGuard;
+
 import java.io.IOException;
+import java.net.Socket;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
@@ -249,6 +252,19 @@ public class SingleClientConnManager implements ClientConnectionManager {
         if (recreate)
             uniquePoolEntry = new PoolEntry();
 
+        // BEGIN android-changed
+        // When using a recycled Socket, we need to re-tag it with any
+        // updated statistics options.
+        try {
+            final Socket socket = uniquePoolEntry.connection.getSocket();
+            if (socket != null) {
+                BlockGuard.tagSocketFd(socket.getFileDescriptor$());
+            }
+        } catch (IOException iox) {
+            log.debug("Problem tagging socket.", iox);
+        }
+        // END android-changed
+
         managedConn = new ConnAdapter(uniquePoolEntry, route);
 
         return managedConn;
@@ -279,6 +295,15 @@ public class SingleClientConnManager implements ClientConnectionManager {
         }
 
         try {
+            // BEGIN android-changed
+            // When recycling a Socket, we un-tag it to avoid collecting
+            // statistics from future users.
+            final Socket socket = uniquePoolEntry.connection.getSocket();
+            if (socket != null) {
+                BlockGuard.untagSocketFd(socket.getFileDescriptor$());
+            }
+            // END android-changed
+
             // make sure that the response has been read completely
             if (sca.isOpen() && (this.alwaysShutDown ||
                                  !sca.isMarkedReusable())
