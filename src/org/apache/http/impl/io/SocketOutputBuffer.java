@@ -43,37 +43,26 @@ import org.apache.http.params.HttpParams;
  * @author <a href="mailto:oleg at ural.ru">Oleg Kalnichevski</a>
  *
  * @version $Revision: 560358 $
- * 
+ *
  * @since 4.0
  */
 public class SocketOutputBuffer extends AbstractSessionOutputBuffer {
 
     public SocketOutputBuffer(
-            final Socket socket, 
+            final Socket socket,
             int buffersize,
             final HttpParams params) throws IOException {
         super();
         if (socket == null) {
             throw new IllegalArgumentException("Socket may not be null");
         }
-        if (buffersize < 0) {
-            buffersize = socket.getReceiveBufferSize();
-// BEGIN android-changed
-            // Workaround for http://b/issue?id=1083103.
-            if (buffersize > 8096) {
-                buffersize = 8096;
-            }
-// END android-changed
-        }
-        if (buffersize < 1024) {
-            buffersize = 1024;
-        }
-
-// BEGIN android-changed
-        socket.setSendBufferSize(buffersize * 3);
-// END andrdoid-changed
-
-        init(socket.getOutputStream(), buffersize, params);
+        // BEGIN android-changed
+        // Workaround for http://b/1083103 and http://b/3514259. We take
+        // 'buffersize' as a hint in the weakest sense, and always use
+        // an 8KiB heap buffer and leave the kernel buffer size alone,
+        // trusting the system to have set a network-appropriate default.
+        init(socket.getOutputStream(), 8192, params);
+        // END android-changed
     }
-    
+
 }
