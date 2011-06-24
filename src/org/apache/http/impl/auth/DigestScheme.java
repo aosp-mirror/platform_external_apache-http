@@ -304,7 +304,7 @@ public class DigestScheme extends RFC2617Scheme {
         String a1 = tmp.toString();
         
         //a1 is suitable for MD5 algorithm
-        if(algorithm.equals("MD5-sess")) {
+        if(algorithm.equalsIgnoreCase("MD5-sess")) { // android-changed: ignore case
             // H( unq(username-value) ":" unq(realm-value) ":" passwd )
             //      ":" unq(nonce-value)
             //      ":" unq(cnonce-value)
@@ -319,7 +319,7 @@ public class DigestScheme extends RFC2617Scheme {
             tmp3.append(':');
             tmp3.append(cnonce);
             a1 = tmp3.toString();
-        } else if (!algorithm.equals("MD5")) {
+        } else if (!algorithm.equalsIgnoreCase("MD5")) { // android-changed: ignore case
             throw new AuthenticationException("Unhandled algorithm " + algorithm + " requested");
         }
         String md5a1 = encode(md5Helper.digest(EncodingUtils.getBytes(a1, charset)));
