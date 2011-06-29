@@ -30,8 +30,7 @@
 
 package org.apache.http.impl.conn.tsccm;
 
-import dalvik.system.BlockGuard;
-
+import dalvik.system.SocketTagger;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
@@ -182,7 +181,7 @@ public class ThreadSafeClientConnManager implements ClientConnectionManager {
                 try {
                     final Socket socket = entry.getConnection().getSocket();
                     if (socket != null) {
-                        BlockGuard.tagSocketFd(socket.getFileDescriptor$());
+                        SocketTagger.get().tag(socket);
                     }
                 } catch (IOException iox) {
                     log.debug("Problem tagging socket.", iox);
@@ -217,7 +216,7 @@ public class ThreadSafeClientConnManager implements ClientConnectionManager {
             final BasicPoolEntry entry = (BasicPoolEntry) hca.getPoolEntry();
             final Socket socket = entry.getConnection().getSocket();
             if (socket != null) {
-                BlockGuard.untagSocketFd(socket.getFileDescriptor$());
+                SocketTagger.get().untag(socket);
             }
             // END android-changed
 
