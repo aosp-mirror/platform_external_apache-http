@@ -36,6 +36,7 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.InetAddress;
 
+import java.net.SocketException;
 import org.apache.http.HttpHost;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpConnectionParams;
@@ -173,10 +174,15 @@ public class DefaultClientConnectionOperator
                     conn.openCompleted(sf.isSecure(sock), params);
                 }
                 break;
-            } catch (ConnectException ex) {
+            // BEGIN android-changed
+            //       catch SocketException to cover any kind of connect failure
+            } catch (SocketException ex) {
                 if (i == addresses.length - 1) {
-                    throw new HttpHostConnectException(target, ex);
+                    ConnectException cause = ex instanceof ConnectException
+                            ? (ConnectException) ex : new ConnectException(ex.getMessage(), ex);
+                    throw new HttpHostConnectException(target, cause);
                 }
+            // END android-changed
             } catch (ConnectTimeoutException ex) {
                 if (i == addresses.length - 1) {
                     throw ex;
@@ -220,7 +226,7 @@ public class DefaultClientConnectionOperator
         }
 
         final LayeredSocketFactory lsf = (LayeredSocketFactory) schm.getSocketFactory();
-        final Socket sock; 
+        final Socket sock;
         try {
             sock = lsf.createSocket
                 (conn.getSocket(), target.getHostName(), schm.resolvePort(target.getPort()), true);
