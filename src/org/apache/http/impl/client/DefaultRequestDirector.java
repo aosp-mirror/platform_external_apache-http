@@ -452,7 +452,7 @@ public class DefaultRequestDirector implements RequestDirector {
                             managedConn.open(route, context, params);
                         } else {
                             // otherwise give up
-                            retrying = false;
+                            throw ex;
                         }
                         
                     }
