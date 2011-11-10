@@ -85,8 +85,7 @@ public class ThreadSafeClientConnManager implements ClientConnectionManager {
      * Creates a new thread safe connection manager.
      *
      * @param params    the parameters for this manager
-     * @param schreg    the scheme registry, or
-     *                  <code>null</code> for the default registry
+     * @param schreg    the scheme registry
      */
     public ThreadSafeClientConnManager(HttpParams params,
                                        SchemeRegistry schreg) {
