@@ -87,8 +87,18 @@ import org.apache.http.util.VersionInfo;
 
 /**
  * Default implementation of an HTTP client.
- * <br/>
- * This class replaces <code>HttpClient</code> in HttpClient 3.
+ *
+ * <h3>Prefer HttpURLConnection for new code</h3>
+ * Android includes two HTTP clients: {@code HttpURLConnection} and Apache HTTP
+ * Client. Both support HTTPS, streaming uploads and downloads, configurable
+ * timeouts, IPv6 and connection pooling. Apache HTTP client has fewer bugs in
+ * Android 2.2 (Froyo) and earlier releases. For Android 2.3 (Gingerbread) and
+ * later, {@link java.net.HttpURLConnection HttpURLConnection} is the best
+ * choice. Its simple API and small size makes it great fit for Android.
+ * Transparent compression and response caching reduce network use, improve
+ * speed and save battery. See the <a
+ * href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">Android
+ * Developers Blog</a> for a comparison of the two HTTP clients.
  *
  * @author <a href="mailto:rolandw at apache.org">Roland Weber</a>
  * @author <a href="mailto:oleg at ural.ru">Oleg Kalnichevski</a>
@@ -112,24 +122,24 @@ public class DefaultHttpClient extends AbstractHttpClient {
             final HttpParams params) {
         super(conman, params);
     }
-    
-       
+
+
     public DefaultHttpClient(final HttpParams params) {
         super(null, params);
     }
 
-    
+
     public DefaultHttpClient() {
         super(null, null);
     }
 
-    
+
     @Override
     protected HttpParams createHttpParams() {
         HttpParams params = new BasicHttpParams();
-        HttpProtocolParams.setVersion(params, 
+        HttpProtocolParams.setVersion(params,
                 HttpVersion.HTTP_1_1);
-        HttpProtocolParams.setContentCharset(params, 
+        HttpProtocolParams.setContentCharset(params,
                 HTTP.DEFAULT_CONTENT_CHARSET);
 
         /*
@@ -138,7 +148,7 @@ public class DefaultHttpClient extends AbstractHttpClient {
          * and results in "417 expectation failed" errors when a HTTP/1.0 server
          * is behind a proxy. http://b/2471595
          */
-        HttpProtocolParams.setUseExpectContinue(params, 
+        HttpProtocolParams.setUseExpectContinue(params,
                 false); // android-changed
 
         // determine the release version from packaged version info
@@ -146,13 +156,13 @@ public class DefaultHttpClient extends AbstractHttpClient {
             ("org.apache.http.client", getClass().getClassLoader());
         final String release = (vi != null) ?
             vi.getRelease() : VersionInfo.UNAVAILABLE;
-        HttpProtocolParams.setUserAgent(params, 
+        HttpProtocolParams.setUserAgent(params,
                 "Apache-HttpClient/" + release + " (java 1.4)");
 
         return params;
     }
 
-    
+
     @Override
     protected HttpRequestExecutor createRequestExecutor() {
         return new HttpRequestExecutor();
@@ -167,9 +177,9 @@ public class DefaultHttpClient extends AbstractHttpClient {
         registry.register(
                 new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
 
-        ClientConnectionManager connManager = null;     
+        ClientConnectionManager connManager = null;
         HttpParams params = getParams();
-        
+
         ClientConnectionManagerFactory factory = null;
 
         // Try first getting the factory directly as an object.
@@ -191,13 +201,13 @@ public class DefaultHttpClient extends AbstractHttpClient {
                 }
             }
         }
-        
+
         if(factory != null) {
             connManager = factory.newInstance(params, registry);
         } else {
-            connManager = new SingleClientConnManager(getParams(), registry); 
+            connManager = new SingleClientConnManager(getParams(), registry);
         }
-        
+
         return connManager;
     }
 
@@ -206,40 +216,40 @@ public class DefaultHttpClient extends AbstractHttpClient {
     protected HttpContext createHttpContext() {
         HttpContext context = new BasicHttpContext();
         context.setAttribute(
-                ClientContext.AUTHSCHEME_REGISTRY, 
+                ClientContext.AUTHSCHEME_REGISTRY,
                 getAuthSchemes());
         context.setAttribute(
-                ClientContext.COOKIESPEC_REGISTRY, 
+                ClientContext.COOKIESPEC_REGISTRY,
                 getCookieSpecs());
         context.setAttribute(
-                ClientContext.COOKIE_STORE, 
+                ClientContext.COOKIE_STORE,
                 getCookieStore());
         context.setAttribute(
-                ClientContext.CREDS_PROVIDER, 
+                ClientContext.CREDS_PROVIDER,
                 getCredentialsProvider());
         return context;
     }
 
-    
+
     @Override
     protected ConnectionReuseStrategy createConnectionReuseStrategy() {
         return new DefaultConnectionReuseStrategy();
     }
-    
+
     @Override
     protected ConnectionKeepAliveStrategy createConnectionKeepAliveStrategy() {
         return new DefaultConnectionKeepAliveStrategy();
     }
-    
+
 
     @Override
     protected AuthSchemeRegistry createAuthSchemeRegistry() {
-        AuthSchemeRegistry registry = new AuthSchemeRegistry(); 
+        AuthSchemeRegistry registry = new AuthSchemeRegistry();
         registry.register(
-                AuthPolicy.BASIC, 
+                AuthPolicy.BASIC,
                 new BasicSchemeFactory());
         registry.register(
-                AuthPolicy.DIGEST, 
+                AuthPolicy.DIGEST,
                 new DigestSchemeFactory());
         return registry;
     }
@@ -249,19 +259,19 @@ public class DefaultHttpClient extends AbstractHttpClient {
     protected CookieSpecRegistry createCookieSpecRegistry() {
         CookieSpecRegistry registry = new CookieSpecRegistry();
         registry.register(
-                CookiePolicy.BEST_MATCH, 
+                CookiePolicy.BEST_MATCH,
                 new BestMatchSpecFactory());
         registry.register(
-                CookiePolicy.BROWSER_COMPATIBILITY, 
+                CookiePolicy.BROWSER_COMPATIBILITY,
                 new BrowserCompatSpecFactory());
         registry.register(
-                CookiePolicy.NETSCAPE, 
+                CookiePolicy.NETSCAPE,
                 new NetscapeDraftSpecFactory());
         registry.register(
-                CookiePolicy.RFC_2109, 
+                CookiePolicy.RFC_2109,
                 new RFC2109SpecFactory());
         registry.register(
-                CookiePolicy.RFC_2965, 
+                CookiePolicy.RFC_2965,
                 new RFC2965SpecFactory());
         return registry;
     }
@@ -337,5 +347,5 @@ public class DefaultHttpClient extends AbstractHttpClient {
     protected UserTokenHandler createUserTokenHandler() {
         return new DefaultUserTokenHandler();
     }
-    
+
 } // class DefaultHttpClient
