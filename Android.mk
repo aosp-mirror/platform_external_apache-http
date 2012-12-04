@@ -21,8 +21,6 @@ ifeq ($(WITH_HOST_DALVIK),true)
     LOCAL_MODULE := apachehttp-hostdex
     LOCAL_MODULE_TAGS := optional
     LOCAL_SRC_FILES := $(call all-java-files-under,src)
-    LOCAL_JAVA_LIBRARIES := core-hostdex
-    LOCAL_NO_STANDARD_LIBRARIES := true
     LOCAL_BUILD_HOST_DEX := true
     LOCAL_MODULE_TAGS := optional
     include $(BUILD_HOST_JAVA_LIBRARY)
