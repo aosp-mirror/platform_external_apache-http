@@ -16,11 +16,9 @@
 LOCAL_PATH:= $(call my-dir)
 # frameworks builds apache-http as part of ext.jar for the device, but
 # here we just build apache-http alone for the host build
-ifeq ($(WITH_HOST_DALVIK),true)
-    include $(CLEAR_VARS)
-    LOCAL_MODULE := apachehttp-hostdex
-    LOCAL_MODULE_TAGS := optional
-    LOCAL_SRC_FILES := $(call all-java-files-under,src)
-    LOCAL_MODULE_TAGS := optional
-    include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
-endif
+include $(CLEAR_VARS)
+LOCAL_MODULE := apachehttp-hostdex
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := $(call all-java-files-under,src)
+LOCAL_MODULE_TAGS := optional
+include $(BUILD_HOST_DALVIK_JAVA_LIBRARY)
