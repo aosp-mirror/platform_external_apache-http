@@ -33,7 +33,13 @@ package org.apache.http.auth.params;
 
 import org.apache.http.params.HttpAbstractParamBean;
 import org.apache.http.params.HttpParams;
+/**
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
+*/
 
+@Deprecated
 public class AuthParamBean extends HttpAbstractParamBean {
 
     public AuthParamBean (final HttpParams params) {

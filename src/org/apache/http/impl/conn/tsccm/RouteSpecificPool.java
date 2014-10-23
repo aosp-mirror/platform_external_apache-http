@@ -46,7 +46,12 @@ import org.apache.http.util.LangUtils;
  * A connection sub-pool for a specific route, used by {@link ConnPoolByRoute}.
  * The methods in this class are unsynchronized. It is expected that the
  * containing pool takes care of synchronization.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class RouteSpecificPool {
 
     private final Log log = LogFactory.getLog(getClass());

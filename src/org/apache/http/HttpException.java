@@ -39,7 +39,12 @@ import org.apache.http.util.ExceptionUtils;
  * @author Laura Werner
  * 
  * @version $Revision: 618017 $ $Date: 2008-02-03 08:42:22 -0800 (Sun, 03 Feb 2008) $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class HttpException extends Exception {
 
     private static final long serialVersionUID = -5437299376222011036L;

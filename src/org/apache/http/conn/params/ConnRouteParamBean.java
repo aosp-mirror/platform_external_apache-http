@@ -42,7 +42,12 @@ import org.apache.http.params.HttpParams;
  * Allows for setting parameters relating to connection routes on
  * {@link HttpParams}.  This class ensures that the values set on the params
  * are type-safe. 
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class ConnRouteParamBean extends HttpAbstractParamBean {
     
     public ConnRouteParamBean (final HttpParams params) {

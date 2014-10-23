@@ -41,7 +41,12 @@ import org.apache.commons.codec.binary.Base64;
  * @author Apache Software Foundation
  * @since 1.3
  * @version $Id: BCodec.java,v 1.5 2004/04/13 22:46:37 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BCodec extends RFC1522Codec implements StringEncoder, StringDecoder {
     /**
      * The default charset used for string decoding and encoding.

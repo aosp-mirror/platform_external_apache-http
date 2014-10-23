@@ -47,7 +47,12 @@ import org.apache.http.protocol.HTTP;
  * @version $Revision: 618367 $
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class StringEntity extends AbstractHttpEntity implements Cloneable {
 
     protected final byte[] content;

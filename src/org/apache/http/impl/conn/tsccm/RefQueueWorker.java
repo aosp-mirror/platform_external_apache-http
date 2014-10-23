@@ -46,7 +46,12 @@ import org.apache.commons.logging.LogFactory;
  * If that feature is used, a daemon thread should be executing
  * this worker. It will pick up the queued references and pass them
  * on to a handler for appropriate processing.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class RefQueueWorker implements Runnable {
 
     private final Log log = LogFactory.getLog(getClass());

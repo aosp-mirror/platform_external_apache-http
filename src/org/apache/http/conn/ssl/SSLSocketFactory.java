@@ -134,8 +134,13 @@ import java.security.UnrecoverableKeyException;
  *   </ul>
  * @author <a href="mailto:oleg at ural.ru">Oleg Kalnichevski</a>
  * @author Julius Davies
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
 
+@Deprecated
 public class SSLSocketFactory implements LayeredSocketFactory {
 
     public static final String TLS   = "TLS";

@@ -39,7 +39,12 @@ import java.io.Serializable;
  * @author <a href="mailto:oleg@ural.ru">Oleg Kalnichevski</a>
  * 
  * @version $Revision: 609106 $ $Date: 2008-01-05 01:15:42 -0800 (Sat, 05 Jan 2008) $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class HttpVersion extends ProtocolVersion
     implements Serializable {
 

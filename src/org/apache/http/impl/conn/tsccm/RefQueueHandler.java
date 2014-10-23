@@ -35,7 +35,12 @@ import java.lang.ref.Reference;
 
 /**
  * Callback handler for {@link RefQueueWorker RefQueueWorker}.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface RefQueueHandler {
 
     /**

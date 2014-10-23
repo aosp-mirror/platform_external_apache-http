@@ -46,7 +46,12 @@ import java.util.TimeZone;
  * @version $Revision: 548066 $
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class HttpDateGenerator {
 
     /** Date format pattern used to generate the header in RFC 1123 format. */

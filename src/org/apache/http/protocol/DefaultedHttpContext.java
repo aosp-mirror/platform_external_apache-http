@@ -40,7 +40,12 @@ package org.apache.http.protocol;
  * @author <a href="mailto:oleg at ural.ru">Oleg Kalnichevski</a>
  * 
  * @version $Revision: 654882 $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class DefaultedHttpContext implements HttpContext {
 
     private final HttpContext local;

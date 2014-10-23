@@ -56,7 +56,12 @@ import org.apache.http.cookie.SetCookie;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * 
  * @version $Revision: 659191 $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BasicClientCookie implements SetCookie, ClientCookie, Cloneable {
 
     /**

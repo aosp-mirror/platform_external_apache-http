@@ -46,7 +46,12 @@ import java.util.concurrent.locks.Condition;
  * Instances of this class do <i>not</i> synchronize access!
  *
  * @author <a href="mailto:rolandw at apache.org">Roland Weber</a>
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class WaitingThread {
 
     /** The condition on which the thread is waiting. */

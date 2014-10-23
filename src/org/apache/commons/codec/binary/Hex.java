@@ -27,7 +27,12 @@ import org.apache.commons.codec.EncoderException;
  * @since 1.1
  * @author Apache Software Foundation
  * @version $Id: Hex.java,v 1.13 2004/04/18 18:22:33 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class Hex implements BinaryEncoder, BinaryDecoder {
 
     /** 

@@ -52,7 +52,12 @@ import org.apache.http.params.HttpParams;
  * the {@link #connectSocket(Socket, String, int, InetAddress, int, HttpParams)}
  * method cannot be reliably interrupted by closing the socket returned by the
  * {@link #createSocket()} method.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class MultihomePlainSocketFactory implements SocketFactory {
 
     /**

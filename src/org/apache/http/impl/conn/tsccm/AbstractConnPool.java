@@ -54,7 +54,12 @@ import org.apache.http.impl.conn.IdleConnectionHandler;
  * The abstract pool includes a {@link #poolLock}, which is used to
  * synchronize access to the internal pool datastructures.
  * Don't use <code>synchronized</code> for that purpose!
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public abstract class AbstractConnPool implements RefQueueHandler {
 
     private final Log log = LogFactory.getLog(getClass());

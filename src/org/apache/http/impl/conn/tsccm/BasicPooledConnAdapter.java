@@ -41,7 +41,12 @@ import org.apache.http.impl.conn.AbstractPooledConnAdapter;
  * A connection wrapper and callback handler.
  * All connections given out by the manager are wrappers which
  * can be {@link #detach detach}ed to prevent further use on release.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BasicPooledConnAdapter extends AbstractPooledConnAdapter {
 
     /**

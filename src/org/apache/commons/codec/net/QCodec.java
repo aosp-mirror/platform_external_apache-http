@@ -43,7 +43,12 @@ import org.apache.commons.codec.StringEncoder;
  * @author Apache Software Foundation
  * @since 1.3
  * @version $Id: QCodec.java,v 1.6 2004/05/24 00:24:32 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class QCodec extends RFC1522Codec implements StringEncoder, StringDecoder {
     /**
      * The default charset used for string decoding and encoding.

@@ -74,7 +74,12 @@ import org.apache.http.params.AbstractHttpParams;
  *
  *
  * @version $Revision: 673450 $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class ClientParamsStack extends AbstractHttpParams {
 
     private final Log log = LogFactory.getLog(getClass());

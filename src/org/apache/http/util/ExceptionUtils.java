@@ -39,7 +39,12 @@ import java.lang.reflect.Method;
  * @author <a href="mailto:laura@lwerner.org">Laura Werner</a>
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class ExceptionUtils {
 
     /** A reference to Throwable's initCause method, or null if it's not there in this JVM */

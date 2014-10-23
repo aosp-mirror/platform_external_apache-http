@@ -21,7 +21,12 @@ package org.apache.commons.codec;
  *
  * @author Apache Software Foundation
  * @version $Id: BinaryDecoder.java,v 1.10 2004/06/15 18:14:15 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface BinaryDecoder extends Decoder {
 
     /**

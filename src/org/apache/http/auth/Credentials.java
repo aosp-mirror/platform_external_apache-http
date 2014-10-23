@@ -39,7 +39,12 @@ import java.security.Principal;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * 
  * @version $Revision: 658430 $ $Date: 2008-05-20 14:04:27 -0700 (Tue, 20 May 2008) $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface Credentials {
 
     Principal getUserPrincipal();

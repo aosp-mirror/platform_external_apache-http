@@ -38,7 +38,12 @@ package org.apache.http.impl.auth;
  * For details see <a href="http://davenport.sourceforge.net/ntlm.html">this resource</a>
  * 
  * @author <a href="mailto:oleg at ural.ru">Oleg Kalnichevski</a>
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
 */
+@Deprecated
 public interface NTLMEngine {
 
     /**

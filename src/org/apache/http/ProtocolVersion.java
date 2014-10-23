@@ -52,7 +52,12 @@ import org.apache.http.util.CharArrayBuffer;
  * @author <a href="mailto:rolandw at apache.org">Roland Weber</a>
  * 
  * @version $Revision: 609106 $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class ProtocolVersion implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 8950662842175091068L;

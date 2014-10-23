@@ -62,7 +62,12 @@ import org.apache.http.conn.OperatedClientConnection;
  * @version   $Revision: 673450 $ $Date: 2008-07-02 10:35:05 -0700 (Wed, 02 Jul 2008) $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class DefaultClientConnection extends SocketHttpClientConnection
     implements OperatedClientConnection {
 

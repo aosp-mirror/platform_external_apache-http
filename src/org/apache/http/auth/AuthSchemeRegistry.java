@@ -47,7 +47,12 @@ import org.apache.http.params.HttpParams;
  *
  * @version $Revision: 652950 $
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class AuthSchemeRegistry {
 
     private final Map<String,AuthSchemeFactory> registeredSchemes;

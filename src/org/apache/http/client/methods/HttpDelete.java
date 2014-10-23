@@ -45,7 +45,12 @@ import java.net.URI;
  * status code returned from the origin server indicates that the action
  * has been completed successfully.
  * </blockquote>
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class HttpDelete extends HttpRequestBase {
 
     public final static String METHOD_NAME = "DELETE";

@@ -34,7 +34,12 @@ import java.io.IOException;
 
 /**
  * Signals an error in the HTTP protocol.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class ClientProtocolException extends IOException {
     
     private static final long serialVersionUID = -5596590843227115865L;

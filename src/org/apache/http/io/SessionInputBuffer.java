@@ -43,7 +43,12 @@ import org.apache.http.util.CharArrayBuffer;
  * @version $Revision: 560528 $
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface SessionInputBuffer {
     
     int read(byte[] b, int off, int len) throws IOException; 

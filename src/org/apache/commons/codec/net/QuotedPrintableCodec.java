@@ -55,7 +55,12 @@ import org.apache.commons.codec.StringEncoder;
  * @author Apache Software Foundation
  * @since 1.3
  * @version $Id: QuotedPrintableCodec.java,v 1.7 2004/04/09 22:21:07 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class QuotedPrintableCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, StringDecoder {
     /**
      * The default charset used for string decoding and encoding.

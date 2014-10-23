@@ -37,7 +37,12 @@ import java.util.Set;
 
 /**
  * A collection of URIs that were used as redirects.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class RedirectLocations {
 
     private final Set<URI> uris;

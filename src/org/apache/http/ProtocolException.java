@@ -38,7 +38,12 @@ package org.apache.http;
  * @author <a href="mailto:laura@lwerner.org">Laura Werner</a>
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class ProtocolException extends HttpException {
 
     private static final long serialVersionUID = -2143571074341228994L;

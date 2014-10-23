@@ -76,7 +76,12 @@ import org.apache.http.conn.ClientConnectionManager;
  * @version   $Revision: 672969 $ $Date: 2008-06-30 18:09:50 -0700 (Mon, 30 Jun 2008) $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public abstract class AbstractClientConnAdapter
     implements ManagedClientConnection {
 

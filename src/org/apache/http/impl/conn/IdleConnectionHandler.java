@@ -48,7 +48,12 @@ import org.apache.http.HttpConnection;
  * @see org.apache.http.conn.ClientConnectionManager#closeIdleConnections
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class IdleConnectionHandler {
 
     private final Log log = LogFactory.getLog(getClass());

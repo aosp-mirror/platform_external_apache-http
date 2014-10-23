@@ -45,7 +45,12 @@ import org.apache.http.util.CharArrayBuffer;
  *
  * <!-- empty lines above to avoid 'svn diff' context problems -->
  * @version $Revision: 604625 $ $Date: 2007-12-16 06:11:11 -0800 (Sun, 16 Dec 2007) $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BufferedHeader implements FormattedHeader, Cloneable {
 
     /**

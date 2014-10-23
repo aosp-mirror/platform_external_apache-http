@@ -29,7 +29,12 @@ import org.apache.commons.logging.Log;
  * @author <a href="mailto:sanders@apache.org">Scott Sanders</a>
  * @author Rod Waldhoff
  * @version $Id: NoOpLog.java 155426 2005-02-26 13:10:49Z dirkv $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class NoOpLog implements Log, Serializable {
 
     /** Convenience constructor */

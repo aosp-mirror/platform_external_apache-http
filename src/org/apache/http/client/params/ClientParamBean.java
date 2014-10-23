@@ -38,7 +38,13 @@ import org.apache.http.HttpHost;
 import org.apache.http.conn.ClientConnectionManagerFactory;
 import org.apache.http.params.HttpAbstractParamBean;
 import org.apache.http.params.HttpParams;
+/**
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
+*/
 
+@Deprecated
 public class ClientParamBean extends HttpAbstractParamBean {
 
     public ClientParamBean (final HttpParams params) {

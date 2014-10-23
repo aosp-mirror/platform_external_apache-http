@@ -50,7 +50,12 @@ import org.apache.http.params.HttpParams;
  * @author <a href="mailto:rolandw at apache.org">Roland Weber</a>
  * @author Michael Becke
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface SocketFactory {
 
     /**

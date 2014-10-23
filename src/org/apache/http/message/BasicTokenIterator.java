@@ -44,7 +44,12 @@ import org.apache.http.TokenIterator;
  * It extends that definition somewhat beyond US-ASCII.
  * 
  * @version $Revision: 602520 $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BasicTokenIterator implements TokenIterator {
 
     /** The HTTP separator characters. Defined in RFC 2616, section 2.2. */

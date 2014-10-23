@@ -25,7 +25,12 @@ import org.apache.commons.codec.StringEncoder;
  * @author Apache Software Foundation
  * @version $Id: SoundexUtils.java,v 1.5 2004/03/17 18:31:35 ggregory Exp $
  * @since 1.3
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 final class SoundexUtils {
 
     /**

@@ -66,7 +66,12 @@ import org.apache.http.conn.scheme.SocketFactory;
  * @version   $Revision: 652193 $ $Date: 2008-04-29 17:10:36 -0700 (Tue, 29 Apr 2008) $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class DefaultClientConnectionOperator
     implements ClientConnectionOperator {
 

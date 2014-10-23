@@ -33,7 +33,12 @@ package org.apache.http;
 
 /**
  * The point of access to the statistics of an {@link HttpConnection}.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface HttpConnectionMetrics {
 
     /**

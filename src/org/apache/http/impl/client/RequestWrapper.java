@@ -56,7 +56,12 @@ import org.apache.http.params.HttpProtocolParams;
  * @version $Revision: 674186 $
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class RequestWrapper extends AbstractHttpMessage implements HttpUriRequest {
     
     private final HttpRequest original;

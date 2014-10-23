@@ -41,7 +41,12 @@ import org.apache.commons.codec.EncoderException;
  * @author Apache Software Foundation
  * @since 1.3
  * @version $Id: RFC1522Codec.java,v 1.2 2004/04/09 22:21:43 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 abstract class RFC1522Codec {
     
     /**

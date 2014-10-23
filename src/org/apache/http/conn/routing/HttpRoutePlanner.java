@@ -42,7 +42,12 @@ import org.apache.http.protocol.HttpContext;
  * Encapsulates logic to compute a {@link HttpRoute} to a target host.
  * Implementations may for example be based on parameters, or on the
  * standard Java system properties.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface HttpRoutePlanner {
     
     /**

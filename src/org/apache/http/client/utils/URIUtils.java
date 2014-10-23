@@ -37,7 +37,12 @@ import org.apache.http.HttpHost;
 /**
  * A collection of utilities for {@link URI URIs}, to workaround
  * bugs within the class or for ease-of-use features.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class URIUtils {
 
      /**

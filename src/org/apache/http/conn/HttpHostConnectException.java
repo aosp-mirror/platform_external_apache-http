@@ -37,7 +37,12 @@ import org.apache.http.HttpHost;
 /**
  * A {@link ConnectException} that specifies the {@link HttpHost} that was
  * being connected to.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class HttpHostConnectException extends ConnectException {
 
     private static final long serialVersionUID = -3194482710275220224L;

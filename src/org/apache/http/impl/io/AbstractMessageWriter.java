@@ -43,7 +43,13 @@ import org.apache.http.message.LineFormatter;
 import org.apache.http.message.BasicLineFormatter;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.CharArrayBuffer;
+/**
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
+*/
 
+@Deprecated
 public abstract class AbstractMessageWriter implements HttpMessageWriter {
     
     protected final SessionOutputBuffer sessionBuffer;    

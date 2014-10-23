@@ -68,7 +68,12 @@ import org.apache.http.util.CharArrayBuffer;
  * @version $Revision: 573864 $ $Date: 2007-09-08 08:53:25 -0700 (Sat, 08 Sep 2007) $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface LineFormatter {
 
 

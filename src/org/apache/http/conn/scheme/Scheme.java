@@ -53,7 +53,12 @@ import org.apache.http.util.LangUtils;
  * @author Michael Becke 
  * @author Jeff Dever
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class Scheme {
 
     /** The name of this scheme, in lowercase. (e.g. http, https) */

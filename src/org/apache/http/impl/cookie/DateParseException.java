@@ -38,7 +38,12 @@ package org.apache.http.impl.cookie;
  * @see DateUtils
  * 
  * @author Michael Becke
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class DateParseException extends Exception {
 
     private static final long serialVersionUID = 4417696455000643370L;

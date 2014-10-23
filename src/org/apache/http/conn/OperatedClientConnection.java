@@ -53,7 +53,12 @@ import org.apache.http.params.HttpParams;
  * @version   $Revision: 646087 $ $Date: 2008-04-08 14:36:46 -0700 (Tue, 08 Apr 2008) $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface OperatedClientConnection
     extends HttpClientConnection, HttpInetConnection {
 

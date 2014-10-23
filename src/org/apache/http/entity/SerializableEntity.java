@@ -38,7 +38,13 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+/**
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
+*/
 
+@Deprecated
 public class SerializableEntity extends AbstractHttpEntity {
     
     private byte[] objSer;

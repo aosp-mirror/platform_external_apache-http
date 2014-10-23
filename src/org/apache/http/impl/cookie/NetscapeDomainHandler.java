@@ -36,7 +36,13 @@ import java.util.StringTokenizer;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.MalformedCookieException;
+/**
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
+*/
 
+@Deprecated
 public class NetscapeDomainHandler extends BasicDomainHandler {
 
     public NetscapeDomainHandler() {

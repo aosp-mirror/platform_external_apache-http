@@ -40,7 +40,12 @@ import org.apache.http.cookie.SetCookie2;
 
 /**
    * <tt>"CommantURL"</tt> cookie attribute handler for RFC 2965 cookie spec.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
    */
+@Deprecated
   public class RFC2965CommentUrlAttributeHandler implements CookieAttributeHandler {
 
       public RFC2965CommentUrlAttributeHandler() {

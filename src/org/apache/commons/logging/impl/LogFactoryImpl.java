@@ -63,8 +63,13 @@ import org.apache.commons.logging.LogFactory;
  * @author Richard A. Sitze
  * @author Brian Stansberry
  * @version $Revision: 399224 $ $Date: 2006-05-03 10:25:54 +0100 (Wed, 03 May 2006) $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
 
+@Deprecated
 public class LogFactoryImpl extends LogFactory {
 
 

@@ -29,7 +29,12 @@ import java.util.Comparator;
  *
  * @author Apache Software Foundation
  * @version $Id: StringEncoderComparator.java,v 1.14 2004/06/21 23:24:17 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class StringEncoderComparator implements Comparator {
 
     /**

@@ -47,7 +47,12 @@ import org.apache.http.util.CharArrayBuffer;
  * 
  * @author Andrea Selva <selva.andre at gmail.com>
  * @author Oleg Kalnichevski <oleg at ural.ru>
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BasicHeaderElementIterator implements HeaderElementIterator {
     
     private final HeaderIterator headerIt;

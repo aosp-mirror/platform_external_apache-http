@@ -53,7 +53,12 @@ import org.apache.http.conn.params.ConnRouteParams;
  * {@link org.apache.http.conn.params.ConnRoutePNames parameters}.
  * It will not make use of any Java system properties,
  * nor of system or browser proxy settings.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class DefaultHttpRoutePlanner implements HttpRoutePlanner {
 
     /** The scheme registry. */

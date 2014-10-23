@@ -34,8 +34,13 @@ import org.apache.commons.logging.Log;
  * @author <a href="mailto:bloritsch@apache.org">Berin Loritsch</a>
  * @author <a href="mailto:donaldp@apache.org">Peter Donald</a>
  * @version $Revision: 370652 $ $Date: 2006-01-19 22:23:48 +0000 (Thu, 19 Jan 2006) $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
 
+@Deprecated
 public class Jdk14Logger implements Log, Serializable {
 
     /**

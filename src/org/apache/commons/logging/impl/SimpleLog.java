@@ -71,7 +71,12 @@ import org.apache.commons.logging.LogConfigurationException;
  * @author Robert Burrell Donkin
  *
  * @version $Id: SimpleLog.java 399221 2006-05-03 09:20:24Z dennisl $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class SimpleLog implements Log, Serializable {
 
 

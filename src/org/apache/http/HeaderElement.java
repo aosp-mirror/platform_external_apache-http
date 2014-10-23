@@ -41,7 +41,12 @@ package org.apache.http;
  * @version $Revision: 569828 $ $Date: 2007-08-26 08:49:38 -0700 (Sun, 26 Aug 2007) $
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface HeaderElement {
 
     String getName();

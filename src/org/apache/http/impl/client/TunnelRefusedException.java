@@ -33,7 +33,13 @@ package org.apache.http.impl.client;
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
+/**
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
+*/
 
+@Deprecated
 public class TunnelRefusedException extends HttpException {
 
     private static final long serialVersionUID = -8646722842745617323L;

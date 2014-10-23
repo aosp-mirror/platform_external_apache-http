@@ -48,7 +48,12 @@ import org.apache.http.HttpHost;
  * @version   $Revision: 648356 $ $Date: 2008-04-15 10:57:53 -0700 (Tue, 15 Apr 2008) $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class SchemeRegistry {
 
     /** The available schemes in this registry. */

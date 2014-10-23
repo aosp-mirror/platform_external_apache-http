@@ -106,7 +106,12 @@ import org.apache.http.protocol.HttpRequestExecutor;
  * @version $Revision: 676023 $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class DefaultRequestDirector implements RequestDirector {
 
     private final Log log = LogFactory.getLog(getClass());

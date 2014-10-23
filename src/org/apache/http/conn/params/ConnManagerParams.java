@@ -46,7 +46,12 @@ import org.apache.http.params.HttpParams;
  * @since 4.0
  *
  * @see ConnManagerPNames
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class ConnManagerParams implements ConnManagerPNames {
 
     /** The default maximum number of connections allowed overall */

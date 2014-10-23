@@ -46,8 +46,13 @@ import java.util.Properties;
  * @author Costin Manolache
  * @author Richard A. Sitze
  * @version $Revision: 399431 $ $Date: 2006-05-03 21:58:34 +0100 (Wed, 03 May 2006) $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
 
+@Deprecated
 public abstract class LogFactory {
 
 

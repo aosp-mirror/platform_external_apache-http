@@ -46,7 +46,12 @@ import org.apache.http.HttpHost;
  * @version $Revision: 620254 $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public final class RouteTracker implements RouteInfo, Cloneable {
 
     /** The target host to connect to. */

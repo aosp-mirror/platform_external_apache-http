@@ -35,7 +35,12 @@ package org.apache.http.client.protocol;
 /**
  * {@link org.apache.http.protocol.HttpContext Context}
  * attribute names for client.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface ClientContext {
     
     public static final String COOKIESPEC_REGISTRY   = "http.cookiespec-registry"; 

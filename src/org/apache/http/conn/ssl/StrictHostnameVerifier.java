@@ -51,7 +51,12 @@ import javax.net.ssl.SSLException;
  * such as "a.b.foo.com".
  * 
  * @author Julius Davies
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class StrictHostnameVerifier extends AbstractVerifier {
 
     public final void verify(

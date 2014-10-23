@@ -63,7 +63,12 @@ import org.apache.http.conn.params.ConnRoutePNames;
  * {@link org.apache.http.conn.params.ConnRoutePNames parameters},
  * though not the {@link
  * org.apache.http.conn.params.ConnRoutePNames#DEFAULT_PROXY DEFAULT_PROXY}.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class ProxySelectorRoutePlanner implements HttpRoutePlanner {
     
     /** The scheme registry. */

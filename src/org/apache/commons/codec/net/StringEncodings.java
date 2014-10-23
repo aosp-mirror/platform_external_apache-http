@@ -22,7 +22,12 @@ package org.apache.commons.codec.net;
  * @author Apache Software Foundation
  * @since 1.3
  * @version $Id: StringEncodings.java,v 1.2 2004/04/09 22:21:07 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 interface StringEncodings {
     /**
      * <p>

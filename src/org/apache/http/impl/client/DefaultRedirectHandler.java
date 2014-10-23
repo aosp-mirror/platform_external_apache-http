@@ -61,7 +61,12 @@ import org.apache.http.protocol.ExecutionContext;
  * @version $Revision: 673450 $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class DefaultRedirectHandler implements RedirectHandler {
 
     private final Log log = LogFactory.getLog(getClass());

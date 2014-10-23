@@ -65,7 +65,12 @@ import org.apache.http.params.HttpParams;
  * @author <a href="mailto:rolandw at apache.org">Roland Weber</a>
  * @author <a href="mailto:becke@u.washington.edu">Michael Becke</a>
  * @author and others
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class ConnPoolByRoute extends AbstractConnPool {
         
     private final Log log = LogFactory.getLog(getClass());

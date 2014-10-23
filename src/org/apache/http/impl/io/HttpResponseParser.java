@@ -44,7 +44,13 @@ import org.apache.http.message.LineParser;
 import org.apache.http.message.ParserCursor;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.CharArrayBuffer;
+/**
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
+*/
 
+@Deprecated
 public class HttpResponseParser extends AbstractMessageParser {
     
     private final HttpResponseFactory responseFactory;

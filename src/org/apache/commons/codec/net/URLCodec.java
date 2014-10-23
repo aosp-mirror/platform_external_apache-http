@@ -46,7 +46,12 @@ import org.apache.commons.codec.StringEncoder;
  * @author Apache Software Foundation
  * @since 1.2
  * @version $Id: URLCodec.java,v 1.19 2004/03/29 07:59:00 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class URLCodec implements BinaryEncoder, BinaryDecoder, StringEncoder, StringDecoder {
     
     /**

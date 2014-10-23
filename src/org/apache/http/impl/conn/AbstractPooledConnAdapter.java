@@ -59,7 +59,12 @@ import org.apache.http.conn.OperatedClientConnection;
  * @version   $Revision: 658775 $ $Date: 2008-05-21 10:30:45 -0700 (Wed, 21 May 2008) $
  *
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public abstract class AbstractPooledConnAdapter extends AbstractClientConnAdapter {
 
     /** The wrapped pool entry. */

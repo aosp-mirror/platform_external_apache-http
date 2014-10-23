@@ -32,7 +32,12 @@ import org.apache.commons.codec.EncoderException;
  * @author Apache Software Foundation
  * @since 1.0-dev
  * @version $Id: Base64.java,v 1.20 2004/05/24 00:21:24 ggregory Exp $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class Base64 implements BinaryEncoder, BinaryDecoder {
 
     /**

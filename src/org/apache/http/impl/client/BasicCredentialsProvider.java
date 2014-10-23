@@ -49,7 +49,12 @@ import org.apache.http.client.CredentialsProvider;
  * @author <a href="mailto:adrian@intencha.com">Adrian Sutton</a>
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BasicCredentialsProvider implements CredentialsProvider {
 
     private final HashMap<AuthScope, Credentials> credMap;

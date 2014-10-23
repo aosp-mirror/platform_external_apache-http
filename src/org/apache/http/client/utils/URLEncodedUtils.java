@@ -48,7 +48,12 @@ import org.apache.http.util.EntityUtils;
 
 /**
  * A collection of utilities for encoding URLs.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class URLEncodedUtils {
 
     public static final String CONTENT_TYPE = "application/x-www-form-urlencoded";

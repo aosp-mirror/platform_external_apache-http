@@ -37,7 +37,12 @@ import org.apache.http.io.HttpTransportMetrics;
 
 /**
  * Implementation of the metrics interface.
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class HttpConnectionMetricsImpl implements HttpConnectionMetrics {
     
     public static final String REQUEST_COUNT = "http.request-count";

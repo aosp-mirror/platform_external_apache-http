@@ -46,7 +46,12 @@ import org.apache.http.message.BasicHttpRequest;
  * @version $Revision: 618367 $
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class DefaultHttpRequestFactory implements HttpRequestFactory {
     
     private static final String[] RFC2616_COMMON_METHODS = {

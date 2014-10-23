@@ -49,7 +49,12 @@ import org.apache.http.ReasonPhraseCatalog;
  * @version $Revision: 573864 $
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BasicHttpResponse extends AbstractHttpMessage
     implements HttpResponse {
 

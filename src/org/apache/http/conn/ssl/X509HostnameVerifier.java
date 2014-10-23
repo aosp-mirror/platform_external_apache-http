@@ -56,7 +56,12 @@ import java.security.cert.X509Certificate;
  * @author <a href="mailto:hauer@psicode.com">Sebastian Hauer</a>
  *
  * @since 4.0 (8-Dec-2006)
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public interface X509HostnameVerifier extends HostnameVerifier {
 
     boolean verify(String host, SSLSession session);

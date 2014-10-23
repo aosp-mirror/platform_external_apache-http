@@ -62,7 +62,12 @@ import org.apache.http.ParseException;
  * @version $Revision: 652956 $ $Date: 2008-05-02 17:13:05 -0700 (Fri, 02 May 2008) $
  * 
  * @since 4.0
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class BasicHeader implements Header, Cloneable {
 
     /**

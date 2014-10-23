@@ -36,7 +36,12 @@ package org.apache.http.conn.ssl;
  * off. This implementation is a no-op, and never throws the SSLException.
  * 
  * @author Julius Davies
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
+@Deprecated
 public class AllowAllHostnameVerifier extends AbstractVerifier {
 
     public final void verify(

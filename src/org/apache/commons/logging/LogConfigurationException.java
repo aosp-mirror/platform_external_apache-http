@@ -24,8 +24,13 @@ package org.apache.commons.logging;
  *
  * @author Craig R. McClanahan
  * @version $Revision: 155426 $ $Date: 2005-02-26 13:10:49 +0000 (Sat, 26 Feb 2005) $
+ *
+ * @deprecated Please use {@link java.net.URL#openConnection} instead.
+ *     Please visit <a href="http://android-developers.blogspot.com/2011/09/androids-http-clients.html">this webpage</a>
+ *     for further details.
  */
 
+@Deprecated
 public class LogConfigurationException extends RuntimeException {
 
 
