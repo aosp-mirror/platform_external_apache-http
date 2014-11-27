@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2007 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,30 @@
  * limitations under the License.
  */
 
-package org.apache.http;
+/**
+ * package-level logging flag
+ */
 
-public class PlaceHolder {
+package android.net.http;
+
+import android.os.SystemClock;
+
+import android.util.Log;
+
+/**
+ * {@hide}
+ */
+class HttpLog {
+    private final static String LOGTAG = "http";
+
+    private static final boolean DEBUG = false;
+    static final boolean LOGV = false;
+
+    static void v(String logMe) {
+        Log.v(LOGTAG, SystemClock.uptimeMillis() + " " + Thread.currentThread().getName() + " " + logMe);
+    }
+
+    static void e(String logMe) {
+        Log.e(LOGTAG, logMe);
+    }
 }
