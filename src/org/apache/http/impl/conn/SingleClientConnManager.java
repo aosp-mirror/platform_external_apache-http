@@ -31,11 +31,11 @@
 
 package org.apache.http.impl.conn;
 
-import dalvik.system.SocketTagger;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
 
+import android.net.TrafficStats;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.conn.ClientConnectionManager;
@@ -261,7 +261,7 @@ public class SingleClientConnManager implements ClientConnectionManager {
         try {
             final Socket socket = uniquePoolEntry.connection.getSocket();
             if (socket != null) {
-                SocketTagger.get().tag(socket);
+                TrafficStats.tagSocket(socket);
             }
         } catch (IOException iox) {
             log.debug("Problem tagging socket.", iox);
@@ -303,7 +303,7 @@ public class SingleClientConnManager implements ClientConnectionManager {
             // statistics from future users.
             final Socket socket = uniquePoolEntry.connection.getSocket();
             if (socket != null) {
-                SocketTagger.get().untag(socket);
+                TrafficStats.untagSocket(socket);
             }
             // END android-changed
 

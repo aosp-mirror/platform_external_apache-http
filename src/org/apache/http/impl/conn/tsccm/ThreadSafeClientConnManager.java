@@ -30,11 +30,11 @@
 
 package org.apache.http.impl.conn.tsccm;
 
-import dalvik.system.SocketTagger;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.TimeUnit;
 
+import android.net.TrafficStats;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.conn.routing.HttpRoute;
@@ -185,7 +185,7 @@ public class ThreadSafeClientConnManager implements ClientConnectionManager {
                 try {
                     final Socket socket = entry.getConnection().getSocket();
                     if (socket != null) {
-                        SocketTagger.get().tag(socket);
+                        TrafficStats.tagSocket(socket);
                     }
                 } catch (IOException iox) {
                     log.debug("Problem tagging socket.", iox);
@@ -220,7 +220,7 @@ public class ThreadSafeClientConnManager implements ClientConnectionManager {
             final BasicPoolEntry entry = (BasicPoolEntry) hca.getPoolEntry();
             final Socket socket = entry.getConnection().getSocket();
             if (socket != null) {
-                SocketTagger.get().untag(socket);
+                TrafficStats.untagSocket(socket);
             }
             // END android-changed
 

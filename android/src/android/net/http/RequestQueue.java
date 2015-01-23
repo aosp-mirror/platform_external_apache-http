@@ -28,7 +28,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Proxy;
-import android.net.WebAddress;
+import android.net.compatibility.WebAddress;
 import android.util.Log;
 
 import java.io.InputStream;
@@ -40,9 +40,6 @@ import java.util.Map;
 
 import org.apache.http.HttpHost;
 
-/**
- * {@hide}
- */
 public class RequestQueue implements RequestFeeder {
 
 

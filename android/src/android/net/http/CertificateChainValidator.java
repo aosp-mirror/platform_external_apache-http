@@ -19,7 +19,7 @@ package android.net.http;
 import com.android.org.conscrypt.SSLParametersImpl;
 import com.android.org.conscrypt.TrustManagerImpl;
 
-import android.util.Slog;
+import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -44,8 +44,6 @@ import javax.net.ssl.X509TrustManager;
 
 /**
  * Class responsible for all server certificate validation functionality
- *
- * {@hide}
  */
 public class CertificateChainValidator {
     private static final String TAG = "CertificateChainValidator";
@@ -176,10 +174,10 @@ public class CertificateChainValidator {
             tmf = TrustManagerFactory.getInstance("X.509");
             tmf.init((KeyStore) null);
         } catch (NoSuchAlgorithmException e) {
-            Slog.w(TAG, "Couldn't find default X.509 TrustManagerFactory");
+            Log.w(TAG, "Couldn't find default X.509 TrustManagerFactory");
             return;
         } catch (KeyStoreException e) {
-            Slog.w(TAG, "Couldn't initialize default X.509 TrustManagerFactory", e);
+            Log.w(TAG, "Couldn't initialize default X.509 TrustManagerFactory", e);
             return;
         }
 
@@ -195,7 +193,7 @@ public class CertificateChainValidator {
             }
         }
         if (!sentUpdate) {
-            Slog.w(TAG, "Didn't find a TrustManager to handle CA list update");
+            Log.w(TAG, "Didn't find a TrustManager to handle CA list update");
         }
     }
 

@@ -21,8 +21,6 @@ import java.util.Locale;
 /**
  * HttpAuthHeader: a class to store HTTP authentication-header parameters.
  * For more information, see: RFC 2617: HTTP Authentication.
- * 
- * {@hide}
  */
 public class HttpAuthHeader {
     /**

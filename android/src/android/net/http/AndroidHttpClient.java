@@ -16,8 +16,6 @@
 
 package android.net.http;
 
-import com.android.internal.http.HttpDateTime;
-
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -504,6 +502,6 @@ public final class AndroidHttpClient implements HttpClient {
      *     of an unsupported format.
      */
     public static long parseDate(String dateString) {
-        return HttpDateTime.parse(dateString);
+        return LegacyHttpDateTime.parse(dateString);
     }
 }

@@ -101,8 +101,6 @@ public class SocketInputBuffer extends AbstractSessionInputBuffer {
      * to rely on isDataAvailable() returning normally; that approach cannot
      * distinguish between an exhausted stream and a stream with zero bytes
      * buffered.
-     *
-     * @hide
      */
     public boolean isStale() throws IOException {
         if (hasBufferedData()) {

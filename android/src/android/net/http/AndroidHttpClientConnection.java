@@ -57,8 +57,6 @@ import java.net.SocketException;
 /**
  * A alternate class for (@link DefaultHttpClientConnection).
  * It has better performance than DefaultHttpClientConnection
- * 
- * {@hide}
  */
 public class AndroidHttpClientConnection
         implements HttpInetConnection, HttpConnection {

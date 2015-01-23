@@ -42,8 +42,6 @@ import org.apache.http.protocol.RequestContent;
 
 /**
  * Represents an HTTP request for a given host.
- * 
- * {@hide}
  */
 
 class Request {
@@ -516,11 +514,8 @@ class Request {
      * Helper: calls error() on eventhandler with appropriate message
      * This should not be called before the mConnection is set.
      */
-    void error(int errorId, int resourceId) {
-        mEventHandler.error(
-                errorId,
-                mConnection.mContext.getText(
-                        resourceId).toString());
+    void error(int errorId, String errorMessage) {
+        mEventHandler.error(errorId, errorMessage);
     }
 
 }

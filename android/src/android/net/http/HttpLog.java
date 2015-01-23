@@ -24,9 +24,6 @@ import android.os.SystemClock;
 
 import android.util.Log;
 
-/**
- * {@hide}
- */
 class HttpLog {
     private final static String LOGTAG = "http";
 
