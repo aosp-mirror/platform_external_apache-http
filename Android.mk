@@ -17,8 +17,10 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := org.apache.http.legacy
 LOCAL_MODULE_TAGS := optional
+LOCAL_JAVA_LIBRARIES := conscrypt
 LOCAL_SRC_FILES := \
-    $(call all-java-files-under,placeholder)
+    $(call all-java-files-under,src) \
+    $(call all-java-files-under,android)
 
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_JAVA_LIBRARY)
