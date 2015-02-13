@@ -36,9 +36,6 @@ import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.BasicHttpContext;
 
-/**
- * {@hide}
- */
 abstract class Connection {
 
     /**

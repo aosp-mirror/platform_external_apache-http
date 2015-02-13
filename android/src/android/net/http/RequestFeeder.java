@@ -22,9 +22,6 @@ package android.net.http;
 
 import org.apache.http.HttpHost;
 
-/**
- * {@hide}
- */
 interface RequestFeeder {
 
     Request getRequest();

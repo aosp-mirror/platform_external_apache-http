@@ -16,8 +16,7 @@
 
 package android.net.http;
 
-import android.net.ParseException;
-import android.net.WebAddress;
+import android.net.compatibility.WebAddress;
 import android.webkit.CookieManager;
 
 import org.apache.commons.codec.binary.Base64;
@@ -33,8 +32,6 @@ import java.util.Random;
 /**
  * RequestHandle: handles a request session that may include multiple
  * redirects, HTTP authentication requests, etc.
- * 
- * {@hide}
  */
 public class RequestHandle {
 
@@ -161,7 +158,7 @@ public class RequestHandle {
                     "RequestHandle.setupRedirect(): too many redirects " +
                     mRequest);
             mRequest.error(EventHandler.ERROR_REDIRECT_LOOP,
-                           com.android.internal.R.string.httpErrorRedirectLoop);
+                    "The page contains too many server redirects.");
             return false;
         }
 
@@ -176,13 +173,16 @@ public class RequestHandle {
         mUrl = redirectTo;
         try {
             mUri = new WebAddress(mUrl);
-        } catch (ParseException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
 
         // update the "Cookie" header based on the redirected url
         mHeaders.remove("Cookie");
-        String cookie = CookieManager.getInstance().getCookie(mUri);
+        String cookie = null;
+        if (mUri != null) {
+            cookie = CookieManager.getInstance().getCookie(mUri.toString());
+        }
         if (cookie != null && cookie.length() > 0) {
             mHeaders.put("Cookie", cookie);
         }

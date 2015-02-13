@@ -29,8 +29,6 @@ import javax.net.ssl.X509TrustManager;
 /**
  * This is only used when a {@code certificate} is available but usage
  * requires a {@link SSLSession}.
- *
- * @hide
  */
 public class DelegatingSSLSession implements SSLSession {
     protected DelegatingSSLSession() {

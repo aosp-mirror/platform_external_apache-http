@@ -183,8 +183,13 @@ public class DefaultClientConnectionOperator
             //       catch SocketException to cover any kind of connect failure
             } catch (SocketException ex) {
                 if (i == addresses.length - 1) {
-                    ConnectException cause = ex instanceof ConnectException
-                            ? (ConnectException) ex : new ConnectException(ex.getMessage(), ex);
+                    final ConnectException cause;
+                    if (ex instanceof ConnectException) {
+                        cause = (ConnectException) ex;
+                    } else {
+                        cause = new ConnectException(ex.getMessage());
+                        cause.initCause(ex);
+                    }
                     throw new HttpHostConnectException(target, cause);
                 }
             // END android-changed

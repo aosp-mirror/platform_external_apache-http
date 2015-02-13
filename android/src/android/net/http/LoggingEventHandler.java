@@ -22,9 +22,6 @@ package android.net.http;
 
 import android.net.http.Headers;
 
-/**
- * {@hide}
- */
 public class LoggingEventHandler implements EventHandler {
 
     public void requestSent() {

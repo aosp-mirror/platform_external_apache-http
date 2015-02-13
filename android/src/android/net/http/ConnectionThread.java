@@ -21,9 +21,6 @@ import android.os.SystemClock;
 
 import java.lang.Thread;
 
-/**
- * {@hide}
- */
 class ConnectionThread extends Thread {
 
     static final int WAIT_TIMEOUT = 5000;

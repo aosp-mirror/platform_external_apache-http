@@ -48,8 +48,6 @@ import java.util.Locale;
 /**
  * A Connection connecting to a secure http server or tunneling through
  * a http proxy server to a https server.
- *
- * @hide
  */
 public class HttpsConnection extends Connection {
 
@@ -66,8 +64,6 @@ public class HttpsConnection extends Connection {
     }
 
     /**
-     * @hide
-     *
      * @param sessionDir directory to cache SSL sessions
      */
     public static void initializeEngine(File sessionDir) {
@@ -423,7 +419,6 @@ public class HttpsConnection extends Connection {
 /**
  * Simple exception we throw if the SSL connection is closed by the user.
  *
- * {@hide}
  */
 class SSLConnectionClosedByUserException extends SSLException {
 

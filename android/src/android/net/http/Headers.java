@@ -29,8 +29,6 @@ import org.apache.http.util.CharArrayBuffer;
 
 /**
  * Manages received headers
- *
- * {@hide}
  */
 public final class Headers {
     private static final String LOGTAG = "Http";
