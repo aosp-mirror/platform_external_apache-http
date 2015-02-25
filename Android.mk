@@ -26,3 +26,6 @@ LOCAL_SDK_VERSION := 21
 
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_JAVA_LIBRARY)
+
+# Archive a copy of the classes.jar in SDK build.
+$(call dist-for-goals,sdk win_sdk,$(full_classes_jar):org.apache.http.legacy.jar)
