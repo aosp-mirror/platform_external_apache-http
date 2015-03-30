@@ -33,6 +33,7 @@ package org.apache.http.impl.client;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Locale;
@@ -430,6 +431,12 @@ public class DefaultRequestDirector implements RequestDirector {
                         if (this.log.isDebugEnabled()) {
                             this.log.debug("Attempt " + execCount + " to execute request");
                         }
+                        // BEGIN android-added
+                        if ((!route.isSecure()) && (!isCleartextTrafficPermitted())) {
+                            throw new IOException(
+                                    "Cleartext traffic not permitted: " + route.getTargetHost());
+                        }
+                        // END android-added
                         response = requestExec.execute(wrapper, managedConn, context);
                         retrying = false;
                         
@@ -1121,4 +1128,40 @@ public class DefaultRequestDirector implements RequestDirector {
         authState.setCredentials(creds);
     }
     
+    // BEGIN android-added
+    /** Cached instance of android.security.NetworkSecurityPolicy. */
+    private static Object networkSecurityPolicy;
+
+    /** Cached android.security.NetworkSecurityPolicy.isCleartextTrafficPermitted method. */
+    private static Method cleartextTrafficPermittedMethod;
+
+    private static boolean isCleartextTrafficPermitted() {
+        // TODO: Remove this method once NetworkSecurityPolicy can be accessed without Reflection.
+        // This method invokes NetworkSecurityPolicy.getInstance().isCleartextTrafficPermitted
+        // via Reflection API.
+        // Because of the way external/apache-http is built, in the near term it can't invoke new
+        // Android framework API directly.
+        try {
+            Object policy;
+            Method method;
+            synchronized (DefaultRequestDirector.class) {
+                if (cleartextTrafficPermittedMethod == null) {
+                    Class<?> cls = Class.forName("android.security.NetworkSecurityPolicy");
+                    Method getInstanceMethod = cls.getMethod("getInstance");
+                    networkSecurityPolicy = getInstanceMethod.invoke(null);
+                    cleartextTrafficPermittedMethod = cls.getMethod("isCleartextTrafficPermitted");
+                }
+                policy = networkSecurityPolicy;
+                method = cleartextTrafficPermittedMethod;
+            }
+            return (Boolean) method.invoke(policy);
+        } catch (ReflectiveOperationException e) {
+            // Can't access the Android framework NetworkSecurityPolicy. To be backward compatible,
+            // assume that cleartext traffic is permitted. Android CTS will take care of ensuring
+            // this issue doesn't occur on new Android platforms.
+            return true;
+        }
+    }
+    // END android-added
+
 } // class DefaultClientRequestDirector
