@@ -14,18 +14,99 @@
 #
 LOCAL_PATH:= $(call my-dir)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := org.apache.http.legacy
-LOCAL_MODULE_TAGS := optional
-LOCAL_JAVA_LIBRARIES := conscrypt
-LOCAL_SRC_FILES := \
+apache_http_src_files := \
     $(call all-java-files-under,src) \
     $(call all-java-files-under,android)
 
-LOCAL_SDK_VERSION := 21
+apache_http_java_libs := conscrypt
 
+apache_http_packages := $(strip \
+  com.android.internal.http.multipart \
+  org.apache.commons.logging \
+  org.apache.commons.logging.impl \
+  org.apache.commons.codec \
+  org.apache.commons.codec.net \
+  org.apache.commons.codec.language \
+  org.apache.commons.codec.binary \
+  org.apache.http.params \
+  org.apache.http \
+  org.apache.http.client.params \
+  org.apache.http.client \
+  org.apache.http.client.utils \
+  org.apache.http.client.protocol \
+  org.apache.http.client.methods \
+  org.apache.http.client.entity \
+  org.apache.http.protocol \
+  org.apache.http.impl \
+  org.apache.http.impl.client \
+  org.apache.http.impl.auth \
+  org.apache.http.impl.cookie \
+  org.apache.http.impl.entity \
+  org.apache.http.impl.io \
+  org.apache.http.impl.conn \
+  org.apache.http.impl.conn.tsccm \
+  org.apache.http.message \
+  org.apache.http.auth.params \
+  org.apache.http.auth \
+  org.apache.http.cookie.params \
+  org.apache.http.cookie \
+  org.apache.http.util \
+  org.apache.http.entity \
+  org.apache.http.io \
+  org.apache.http.conn.params \
+  org.apache.http.conn \
+  org.apache.http.conn.routing \
+  org.apache.http.conn.scheme \
+  org.apache.http.conn.util \
+  android.net.compatibility \
+  android.net.http \
+)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := org.apache.http.legacy
+LOCAL_MODULE_TAGS := optional
+LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
+LOCAL_SRC_FILES := $(apache_http_src_files)
+LOCAL_SDK_VERSION := 21
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_JAVA_LIBRARY)
 
+##############################################
+# Generate the stub source files
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := $(apache_http_src_files)
+LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
+LOCAL_MODULE_CLASS := JAVA_LIBRARIES
+LOCAL_DROIDDOC_SOURCE_PATH := $(LOCAL_PATH)/src \
+  $(LOCAL_PATH)/android
+
+LOCAL_DROIDDOC_OPTIONS:= \
+    -stubpackages $(subst $(space),:,$(apache_http_packages)) \
+    -stubs $(TARGET_OUT_COMMON_INTERMEDIATES)/JAVA_LIBRARIES/apache-http-stubs_intermediates/src \
+    -nodocs
+
+LOCAL_SDK_VERSION := 21
+LOCAL_UNINSTALLABLE_MODULE := true
+LOCAL_MODULE := apache-http-stubs-gen
+
+include $(BUILD_DROIDDOC)
+apache_http_stubs_gen_stamp := $(full_target)
+
+###############################################
+# Build the stub source files into a jar.
+include $(CLEAR_VARS)
+LOCAL_MODULE := apache-http-stubs
+LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
+LOCAL_SOURCE_FILES_ALL_GENERATED := true
+include $(BUILD_STATIC_JAVA_LIBRARY)
+# Make sure to run droiddoc first to generate the stub source files.
+$(full_classes_compiled_jar) : $(apache_http_stubs_gen_stamp)
+$(full_classes_jack) : $(apache_http_stubs_gen_stamp)
+
 # Archive a copy of the classes.jar in SDK build.
 $(call dist-for-goals,sdk win_sdk,$(full_classes_jar):org.apache.http.legacy.jar)
+
+apache_http_src_files :=
+apache_http_java_libs :=
+apache_http_packages :=
+apache_http_stubs_gen_stamp :=
