@@ -63,7 +63,7 @@ apache_http_packages := $(strip \
 )
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := org.apache.http.legacy
+LOCAL_MODULE := org.apache.http.legacy.boot
 LOCAL_MODULE_TAGS := optional
 LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
 LOCAL_SRC_FILES := $(apache_http_src_files)
@@ -82,7 +82,7 @@ LOCAL_DROIDDOC_SOURCE_PATH := $(LOCAL_PATH)/src \
 
 LOCAL_DROIDDOC_OPTIONS:= \
     -stubpackages $(subst $(space),:,$(apache_http_packages)) \
-    -stubs $(TARGET_OUT_COMMON_INTERMEDIATES)/JAVA_LIBRARIES/apache-http-stubs_intermediates/src \
+    -stubs $(TARGET_OUT_COMMON_INTERMEDIATES)/JAVA_LIBRARIES/org.apache.http.legacy_intermediates/src \
     -nodocs
 
 LOCAL_SDK_VERSION := 21
@@ -95,10 +95,11 @@ apache_http_stubs_gen_stamp := $(full_target)
 ###############################################
 # Build the stub source files into a jar.
 include $(CLEAR_VARS)
-LOCAL_MODULE := apache-http-stubs
+LOCAL_MODULE := org.apache.http.legacy
 LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
 LOCAL_SOURCE_FILES_ALL_GENERATED := true
 include $(BUILD_STATIC_JAVA_LIBRARY)
+
 # Make sure to run droiddoc first to generate the stub source files.
 $(full_classes_compiled_jar) : $(apache_http_stubs_gen_stamp)
 $(full_classes_jack) : $(apache_http_stubs_gen_stamp)
