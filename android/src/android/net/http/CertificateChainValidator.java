@@ -23,6 +23,7 @@ import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
@@ -231,7 +232,22 @@ public class CertificateChainValidator {
                 TrustManagerImpl trustManager = (TrustManagerImpl) x509TrustManager;
                 trustManager.checkServerTrusted(chain, authType, domain);
             } else {
-                x509TrustManager.checkServerTrusted(chain, authType);
+                // Use duck-typing to try and call the hostname aware checkServerTrusted if
+                // available.
+                try {
+                    Method method = x509TrustManager.getClass().getMethod("checkServerTrusted",
+                            X509Certificate[].class,
+                            String.class,
+                            String.class);
+                    method.invoke(x509TrustManager, chain, authType, domain);
+                } catch (NoSuchMethodException | IllegalAccessException e) {
+                    x509TrustManager.checkServerTrusted(chain, authType);
+                } catch (InvocationTargetException e) {
+                    if (e.getCause() instanceof CertificateException) {
+                        throw (CertificateException) e.getCause();
+                    }
+                    throw new RuntimeException(e.getCause());
+                }
             }
             return null;  // No errors.
         } catch (GeneralSecurityException e) {
