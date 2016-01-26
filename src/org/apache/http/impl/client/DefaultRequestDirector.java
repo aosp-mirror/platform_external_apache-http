@@ -432,7 +432,9 @@ public class DefaultRequestDirector implements RequestDirector {
                             this.log.debug("Attempt " + execCount + " to execute request");
                         }
                         // BEGIN android-added
-                        if ((!route.isSecure()) && (!isCleartextTrafficPermitted())) {
+                        if ((!route.isSecure())
+                                && (!isCleartextTrafficPermitted(
+                                        route.getTargetHost().getHostName()))) {
                             throw new IOException(
                                     "Cleartext traffic not permitted: " + route.getTargetHost());
                         }
@@ -1135,7 +1137,7 @@ public class DefaultRequestDirector implements RequestDirector {
     /** Cached android.security.NetworkSecurityPolicy.isCleartextTrafficPermitted method. */
     private static Method cleartextTrafficPermittedMethod;
 
-    private static boolean isCleartextTrafficPermitted() {
+    private static boolean isCleartextTrafficPermitted(String hostname) {
         // TODO: Remove this method once NetworkSecurityPolicy can be accessed without Reflection.
         // This method invokes NetworkSecurityPolicy.getInstance().isCleartextTrafficPermitted
         // via Reflection API.
@@ -1149,12 +1151,13 @@ public class DefaultRequestDirector implements RequestDirector {
                     Class<?> cls = Class.forName("android.security.NetworkSecurityPolicy");
                     Method getInstanceMethod = cls.getMethod("getInstance");
                     networkSecurityPolicy = getInstanceMethod.invoke(null);
-                    cleartextTrafficPermittedMethod = cls.getMethod("isCleartextTrafficPermitted");
+                    cleartextTrafficPermittedMethod =
+                            cls.getMethod("isCleartextTrafficPermitted", String.class);
                 }
                 policy = networkSecurityPolicy;
                 method = cleartextTrafficPermittedMethod;
             }
-            return (Boolean) method.invoke(policy);
+            return (Boolean) method.invoke(policy, hostname);
         } catch (ReflectiveOperationException e) {
             // Can't access the Android framework NetworkSecurityPolicy. To be backward compatible,
             // assume that cleartext traffic is permitted. Android CTS will take care of ensuring
