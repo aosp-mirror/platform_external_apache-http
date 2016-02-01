@@ -228,26 +228,21 @@ public class CertificateChainValidator {
 
         try {
             X509TrustManager x509TrustManager = SSLParametersImpl.getDefaultX509TrustManager();
-            if (x509TrustManager instanceof TrustManagerImpl) {
-                TrustManagerImpl trustManager = (TrustManagerImpl) x509TrustManager;
-                trustManager.checkServerTrusted(chain, authType, domain);
-            } else {
-                // Use duck-typing to try and call the hostname aware checkServerTrusted if
-                // available.
-                try {
-                    Method method = x509TrustManager.getClass().getMethod("checkServerTrusted",
-                            X509Certificate[].class,
-                            String.class,
-                            String.class);
-                    method.invoke(x509TrustManager, chain, authType, domain);
-                } catch (NoSuchMethodException | IllegalAccessException e) {
-                    x509TrustManager.checkServerTrusted(chain, authType);
-                } catch (InvocationTargetException e) {
-                    if (e.getCause() instanceof CertificateException) {
-                        throw (CertificateException) e.getCause();
-                    }
-                    throw new RuntimeException(e.getCause());
+            // Use duck-typing to try and call the hostname aware checkServerTrusted if
+            // available.
+            try {
+                Method method = x509TrustManager.getClass().getMethod("checkServerTrusted",
+                        X509Certificate[].class,
+                        String.class,
+                        String.class);
+                method.invoke(x509TrustManager, chain, authType, domain);
+            } catch (NoSuchMethodException | IllegalAccessException e) {
+                x509TrustManager.checkServerTrusted(chain, authType);
+            } catch (InvocationTargetException e) {
+                if (e.getCause() instanceof CertificateException) {
+                    throw (CertificateException) e.getCause();
                 }
+                throw new RuntimeException(e.getCause());
             }
             return null;  // No errors.
         } catch (GeneralSecurityException e) {
