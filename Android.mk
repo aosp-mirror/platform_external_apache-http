@@ -75,10 +75,31 @@ include $(BUILD_JAVA_LIBRARY)
 # Generate the stub source files
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(apache_http_src_files)
+LOCAL_SRC_FILES += \
+    ../../frameworks/base/core/java/org/apache/http/conn/ConnectTimeoutException.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/scheme/HostNameResolver.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/scheme/LayeredSocketFactory.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/scheme/SocketFactory.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/ssl/AbstractVerifier.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/ssl/AllowAllHostnameVerifier.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/ssl/AndroidDistinguishedNameParser.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/ssl/BrowserCompatHostnameVerifier.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/ssl/SSLSocketFactory.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/ssl/StrictHostnameVerifier.java \
+    ../../frameworks/base/core/java/org/apache/http/conn/ssl/X509HostnameVerifier.java \
+    ../../frameworks/base/core/java/org/apache/http/params/CoreConnectionPNames.java \
+    ../../frameworks/base/core/java/org/apache/http/params/HttpConnectionParams.java \
+    ../../frameworks/base/core/java/org/apache/http/params/HttpParams.java \
+    ../../frameworks/base/core/java/android/net/http/HttpResponseCache.java \
+    ../../frameworks/base/core/java/android/net/http/SslCertificate.java \
+    ../../frameworks/base/core/java/android/net/http/SslError.java \
+
+
 LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_DROIDDOC_SOURCE_PATH := $(LOCAL_PATH)/src \
-  $(LOCAL_PATH)/android
+  $(LOCAL_PATH)/android \
+  $(LOCAL_PATH)/../../frameworks/base/core/java/org/apache
 
 LOCAL_DROIDDOC_OPTIONS:= \
     -stubpackages $(subst $(space),:,$(apache_http_packages)) \
