@@ -114,7 +114,7 @@ include $(BUILD_DROIDDOC)
 apache_http_stubs_gen_stamp := $(full_target)
 
 # For unbundled build we'll use the prebuilt jar from prebuilts/sdk.
-ifeq (,$(TARGET_BUILD_APPS))
+ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))
 ###############################################
 # Build the stub source files into a jar.
 include $(CLEAR_VARS)
