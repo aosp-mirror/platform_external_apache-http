@@ -93,9 +93,9 @@ LOCAL_SRC_FILES += \
     ../../frameworks/base/core/java/android/net/http/HttpResponseCache.java \
     ../../frameworks/base/core/java/android/net/http/SslCertificate.java \
     ../../frameworks/base/core/java/android/net/http/SslError.java \
+    ../../frameworks/base/core/java/com/android/internal/util/HexDump.java \
 
-
-LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
+LOCAL_JAVA_LIBRARIES := bouncycastle okhttp $(apache_http_java_libs)
 LOCAL_MODULE_CLASS := JAVA_LIBRARIES
 LOCAL_DROIDDOC_SOURCE_PATH := $(LOCAL_PATH)/src \
   $(LOCAL_PATH)/android \
