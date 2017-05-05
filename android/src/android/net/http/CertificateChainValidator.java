@@ -16,7 +16,7 @@
 
 package android.net.http;
 
-import com.android.org.conscrypt.SSLParametersImpl;
+import com.android.org.conscrypt.Conscrypt;
 import com.android.org.conscrypt.TrustManagerImpl;
 
 import android.util.Log;
@@ -227,7 +227,7 @@ public class CertificateChainValidator {
         }
 
         try {
-            X509TrustManager x509TrustManager = SSLParametersImpl.getDefaultX509TrustManager();
+            X509TrustManager x509TrustManager = Conscrypt.getDefaultX509TrustManager();
             // Use duck-typing to try and call the hostname aware checkServerTrusted if
             // available.
             try {
