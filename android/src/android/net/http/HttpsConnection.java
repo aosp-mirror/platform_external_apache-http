@@ -18,6 +18,7 @@ package android.net.http;
 
 import android.content.Context;
 import android.util.Log;
+import com.android.org.conscrypt.Conscrypt;
 import com.android.org.conscrypt.FileClientSessionCache;
 import com.android.org.conscrypt.OpenSSLContextImpl;
 import com.android.org.conscrypt.SSLClientSessionCache;
@@ -75,7 +76,7 @@ public class HttpsConnection extends Connection {
                 cache = FileClientSessionCache.usingDirectory(sessionDir);
             }
 
-            OpenSSLContextImpl sslContext = OpenSSLContextImpl.getPreferred();
+            OpenSSLContextImpl sslContext =  (OpenSSLContextImpl) Conscrypt.newPreferredSSLContextSpi();
 
             // here, trust managers is a single trust-all manager
             TrustManager[] trustManagers = new TrustManager[] {
