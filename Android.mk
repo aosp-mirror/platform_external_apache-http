@@ -101,17 +101,31 @@ LOCAL_DROIDDOC_SOURCE_PATH := $(LOCAL_PATH)/src \
   $(LOCAL_PATH)/android \
   $(LOCAL_PATH)/../../frameworks/base/core/java/org/apache
 
+APACHE_HTTP_LEGACY_OUTPUT_API_FILE := $(TARGET_OUT_COMMON_INTERMEDIATES)/JAVA_LIBRARIES/org.apache.http.legacy.stubs_intermediates/api.txt
+APACHE_HTTP_LEGACY_OUTPUT_REMOVED_API_FILE := $(TARGET_OUT_COMMON_INTERMEDIATES)/JAVA_LIBRARIES/org.apache.http.legacy.stubs_intermediates/removed.txt
+
+APACHE_HTTP_LEGACY_API_FILE := $(LOCAL_PATH)/api/apache-http-legacy-current.txt
+APACHE_HTTP_LEGACY_REMOVED_API_FILE := $(LOCAL_PATH)/api/apache-http-legacy-removed.txt
+
 LOCAL_DROIDDOC_OPTIONS:= \
     -stubpackages $(subst $(space),:,$(apache_http_packages)) \
     -stubs $(TARGET_OUT_COMMON_INTERMEDIATES)/JAVA_LIBRARIES/org.apache.http.legacy_intermediates/src \
-    -nodocs
+    -nodocs \
+    -api $(APACHE_HTTP_LEGACY_OUTPUT_API_FILE) \
+    -removedApi $(APACHE_HTTP_LEGACY_OUTPUT_REMOVED_API_FILE) \
 
 LOCAL_SDK_VERSION := 21
 LOCAL_UNINSTALLABLE_MODULE := true
 LOCAL_MODULE := apache-http-stubs-gen
 
 include $(BUILD_DROIDDOC)
+
+# Remember the target that will trigger the code generation.
 apache_http_stubs_gen_stamp := $(full_target)
+
+# Add some additional dependencies
+$(APACHE_HTTP_LEGACY_OUTPUT_API_FILE): $(full_target)
+$(APACHE_HTTP_LEGACY_OUTPUT_REMOVED_API_FILE): $(full_target)
 
 # For unbundled build we'll use the prebuilt jar from prebuilts/sdk.
 ifeq (,$(TARGET_BUILD_APPS)$(filter true,$(TARGET_BUILD_PDK)))
@@ -127,6 +141,39 @@ include $(BUILD_STATIC_JAVA_LIBRARY)
 
 # Archive a copy of the classes.jar in SDK build.
 $(call dist-for-goals,sdk win_sdk,$(full_classes_jar):org.apache.http.legacy.jar)
+
+# Check that the org.apache.http.legacy.stubs library has not changed
+# ===================================================================
+
+# Check that the API we're building hasn't changed from the not-yet-released
+# SDK version.
+$(eval $(call check-api, \
+    check-apache-http-legacy-api-current, \
+    $(APACHE_HTTP_LEGACY_API_FILE), \
+    $(APACHE_HTTP_LEGACY_OUTPUT_API_FILE), \
+    $(APACHE_HTTP_LEGACY_REMOVED_API_FILE), \
+    $(APACHE_HTTP_LEGACY_OUTPUT_REMOVED_API_FILE), \
+    -error 2 -error 3 -error 4 -error 5 -error 6 \
+    -error 7 -error 8 -error 9 -error 10 -error 11 -error 12 -error 13 -error 14 -error 15 \
+    -error 16 -error 17 -error 18 -error 19 -error 20 -error 21 -error 23 -error 24 \
+    -error 25 -error 26 -error 27, \
+    cat $(LOCAL_PATH)/api/apicheck_msg_apache_http_legacy.txt, \
+    check-apache-http-legacy-api, \
+    $(call doc-timestamp-for,apache-http-stubs-gen) \
+    ))
+
+.PHONY: check-apache-http-legacy-api
+checkapi: check-apache-http-legacy-api
+
+.PHONY: update-apache-http-legacy-api
+update-api: update-apache-http-legacy-api
+
+update-apache-http-legacy-api: $(APACHE_HTTP_LEGACY_OUTPUT_API_FILE) | $(ACP)
+	@echo Copying apache-http-legacy-current.txt
+	$(hide) $(ACP) $(APACHE_HTTP_LEGACY_OUTPUT_API_FILE) $(APACHE_HTTP_LEGACY_API_FILE)
+	@echo Copying apache-http-legacy-removed.txt
+	$(hide) $(ACP) $(APACHE_HTTP_LEGACY_OUTPUT_REMOVED_API_FILE) $(APACHE_HTTP_LEGACY_REMOVED_API_FILE)
+
 endif  # not TARGET_BUILD_APPS
 
 apache_http_src_files :=
