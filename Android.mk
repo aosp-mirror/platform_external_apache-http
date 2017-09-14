@@ -69,6 +69,13 @@ LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
 LOCAL_SRC_FILES := $(apache_http_src_files)
 LOCAL_SDK_VERSION := 21
 LOCAL_MODULE_TAGS := optional
+# Previously, this JAR was included on the bootclasspath so was compiled using
+# the speed-profile. ensures that it continues to be compiled using the
+# speed-profile in order to avoid regressing the performance, particularly of
+# app launch times. Without this it would be compiled using quicken (which is
+# interpreter + JIT) and so would be slower.
+LOCAL_DEX_PREOPT_GENERATE_PROFILE := true
+LOCAL_DEX_PREOPT_PROFILE_CLASS_LISTING := $(LOCAL_PATH)/art-profile/$(LOCAL_MODULE).prof.txt
 include $(BUILD_JAVA_LIBRARY)
 
 ##############################################
