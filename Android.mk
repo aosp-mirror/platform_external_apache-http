@@ -116,6 +116,7 @@ APACHE_HTTP_LEGACY_REMOVED_API_FILE := $(LOCAL_PATH)/api/apache-http-legacy-remo
 
 LOCAL_DROIDDOC_OPTIONS:= \
     -stubpackages $(subst $(space),:,$(apache_http_packages)) \
+    -hidePackage com.android.okhttp \
     -stubs $(TARGET_OUT_COMMON_INTERMEDIATES)/JAVA_LIBRARIES/org.apache.http.legacy_intermediates/src \
     -nodocs \
     -api $(APACHE_HTTP_LEGACY_OUTPUT_API_FILE) \
