@@ -1777,7 +1777,7 @@ package org.apache.http.conn {
     method public java.net.Socket connectSocket(java.net.Socket, java.lang.String, int, java.net.InetAddress, int, org.apache.http.params.HttpParams) throws java.io.IOException;
     method public java.net.Socket createSocket();
     method public static org.apache.http.conn.MultihomePlainSocketFactory getSocketFactory();
-    method public final boolean isSecure(java.net.Socket) throws java.lang.IllegalArgumentException;
+    method public boolean isSecure(java.net.Socket) throws java.lang.IllegalArgumentException;
   }
 
   public abstract deprecated interface OperatedClientConnection implements org.apache.http.HttpClientConnection org.apache.http.HttpInetConnection {
@@ -1884,19 +1884,16 @@ package org.apache.http.conn.routing {
     ctor public HttpRoute(org.apache.http.HttpHost);
     ctor public HttpRoute(org.apache.http.HttpHost, java.net.InetAddress, org.apache.http.HttpHost, boolean);
     method public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
-    method public final boolean equals(java.lang.Object);
-    method public final int getHopCount();
-    method public final org.apache.http.HttpHost getHopTarget(int);
-    method public final org.apache.http.conn.routing.RouteInfo.LayerType getLayerType();
-    method public final java.net.InetAddress getLocalAddress();
-    method public final org.apache.http.HttpHost getProxyHost();
-    method public final org.apache.http.HttpHost getTargetHost();
-    method public final org.apache.http.conn.routing.RouteInfo.TunnelType getTunnelType();
-    method public final int hashCode();
-    method public final boolean isLayered();
-    method public final boolean isSecure();
-    method public final boolean isTunnelled();
-    method public final java.lang.String toString();
+    method public int getHopCount();
+    method public org.apache.http.HttpHost getHopTarget(int);
+    method public org.apache.http.conn.routing.RouteInfo.LayerType getLayerType();
+    method public java.net.InetAddress getLocalAddress();
+    method public org.apache.http.HttpHost getProxyHost();
+    method public org.apache.http.HttpHost getTargetHost();
+    method public org.apache.http.conn.routing.RouteInfo.TunnelType getTunnelType();
+    method public boolean isLayered();
+    method public boolean isSecure();
+    method public boolean isTunnelled();
   }
 
   public abstract deprecated interface HttpRouteDirector {
@@ -1945,26 +1942,23 @@ package org.apache.http.conn.routing {
     ctor public RouteTracker(org.apache.http.HttpHost, java.net.InetAddress);
     ctor public RouteTracker(org.apache.http.conn.routing.HttpRoute);
     method public java.lang.Object clone() throws java.lang.CloneNotSupportedException;
-    method public final void connectProxy(org.apache.http.HttpHost, boolean);
-    method public final void connectTarget(boolean);
-    method public final boolean equals(java.lang.Object);
-    method public final int getHopCount();
-    method public final org.apache.http.HttpHost getHopTarget(int);
-    method public final org.apache.http.conn.routing.RouteInfo.LayerType getLayerType();
-    method public final java.net.InetAddress getLocalAddress();
-    method public final org.apache.http.HttpHost getProxyHost();
-    method public final org.apache.http.HttpHost getTargetHost();
-    method public final org.apache.http.conn.routing.RouteInfo.TunnelType getTunnelType();
-    method public final int hashCode();
-    method public final boolean isConnected();
-    method public final boolean isLayered();
-    method public final boolean isSecure();
-    method public final boolean isTunnelled();
-    method public final void layerProtocol(boolean);
-    method public final org.apache.http.conn.routing.HttpRoute toRoute();
-    method public final java.lang.String toString();
-    method public final void tunnelProxy(org.apache.http.HttpHost, boolean);
-    method public final void tunnelTarget(boolean);
+    method public void connectProxy(org.apache.http.HttpHost, boolean);
+    method public void connectTarget(boolean);
+    method public int getHopCount();
+    method public org.apache.http.HttpHost getHopTarget(int);
+    method public org.apache.http.conn.routing.RouteInfo.LayerType getLayerType();
+    method public java.net.InetAddress getLocalAddress();
+    method public org.apache.http.HttpHost getProxyHost();
+    method public org.apache.http.HttpHost getTargetHost();
+    method public org.apache.http.conn.routing.RouteInfo.TunnelType getTunnelType();
+    method public boolean isConnected();
+    method public boolean isLayered();
+    method public boolean isSecure();
+    method public boolean isTunnelled();
+    method public void layerProtocol(boolean);
+    method public org.apache.http.conn.routing.HttpRoute toRoute();
+    method public void tunnelProxy(org.apache.http.HttpHost, boolean);
+    method public void tunnelTarget(boolean);
   }
 
 }
@@ -1985,29 +1979,27 @@ package org.apache.http.conn.scheme {
     method public java.net.Socket connectSocket(java.net.Socket, java.lang.String, int, java.net.InetAddress, int, org.apache.http.params.HttpParams) throws java.io.IOException;
     method public java.net.Socket createSocket();
     method public static org.apache.http.conn.scheme.PlainSocketFactory getSocketFactory();
-    method public final boolean isSecure(java.net.Socket) throws java.lang.IllegalArgumentException;
+    method public boolean isSecure(java.net.Socket) throws java.lang.IllegalArgumentException;
   }
 
   public final deprecated class Scheme {
     ctor public Scheme(java.lang.String, org.apache.http.conn.scheme.SocketFactory, int);
-    method public final boolean equals(java.lang.Object);
-    method public final int getDefaultPort();
-    method public final java.lang.String getName();
-    method public final org.apache.http.conn.scheme.SocketFactory getSocketFactory();
-    method public final boolean isLayered();
-    method public final int resolvePort(int);
-    method public final java.lang.String toString();
+    method public int getDefaultPort();
+    method public java.lang.String getName();
+    method public org.apache.http.conn.scheme.SocketFactory getSocketFactory();
+    method public boolean isLayered();
+    method public int resolvePort(int);
   }
 
   public final deprecated class SchemeRegistry {
     ctor public SchemeRegistry();
-    method public final synchronized org.apache.http.conn.scheme.Scheme get(java.lang.String);
-    method public final synchronized org.apache.http.conn.scheme.Scheme getScheme(java.lang.String);
-    method public final synchronized org.apache.http.conn.scheme.Scheme getScheme(org.apache.http.HttpHost);
-    method public final synchronized java.util.List<java.lang.String> getSchemeNames();
-    method public final synchronized org.apache.http.conn.scheme.Scheme register(org.apache.http.conn.scheme.Scheme);
+    method public synchronized org.apache.http.conn.scheme.Scheme get(java.lang.String);
+    method public synchronized org.apache.http.conn.scheme.Scheme getScheme(java.lang.String);
+    method public synchronized org.apache.http.conn.scheme.Scheme getScheme(org.apache.http.HttpHost);
+    method public synchronized java.util.List<java.lang.String> getSchemeNames();
+    method public synchronized org.apache.http.conn.scheme.Scheme register(org.apache.http.conn.scheme.Scheme);
     method public synchronized void setItems(java.util.Map<java.lang.String, org.apache.http.conn.scheme.Scheme>);
-    method public final synchronized org.apache.http.conn.scheme.Scheme unregister(java.lang.String);
+    method public synchronized org.apache.http.conn.scheme.Scheme unregister(java.lang.String);
   }
 
   public abstract deprecated interface SocketFactory {
@@ -3948,10 +3940,10 @@ package org.apache.http.protocol {
 
   public final deprecated class BasicHttpProcessor implements java.lang.Cloneable org.apache.http.protocol.HttpProcessor org.apache.http.protocol.HttpRequestInterceptorList org.apache.http.protocol.HttpResponseInterceptorList {
     ctor public BasicHttpProcessor();
-    method public final void addInterceptor(org.apache.http.HttpRequestInterceptor);
-    method public final void addInterceptor(org.apache.http.HttpRequestInterceptor, int);
-    method public final void addInterceptor(org.apache.http.HttpResponseInterceptor);
-    method public final void addInterceptor(org.apache.http.HttpResponseInterceptor, int);
+    method public void addInterceptor(org.apache.http.HttpRequestInterceptor);
+    method public void addInterceptor(org.apache.http.HttpRequestInterceptor, int);
+    method public void addInterceptor(org.apache.http.HttpResponseInterceptor);
+    method public void addInterceptor(org.apache.http.HttpResponseInterceptor, int);
     method public void addRequestInterceptor(org.apache.http.HttpRequestInterceptor);
     method public void addRequestInterceptor(org.apache.http.HttpRequestInterceptor, int);
     method public void addResponseInterceptor(org.apache.http.HttpResponseInterceptor, int);
