@@ -67,7 +67,6 @@ LOCAL_MODULE := org.apache.http.legacy.boot
 LOCAL_MODULE_TAGS := optional
 LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
 LOCAL_SRC_FILES := $(apache_http_src_files)
-LOCAL_SDK_VERSION := 21
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_JAVA_LIBRARY)
 
