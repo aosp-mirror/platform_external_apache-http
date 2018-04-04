@@ -68,6 +68,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_JAVA_LIBRARIES := $(apache_http_java_libs)
 LOCAL_SRC_FILES := $(apache_http_src_files)
 LOCAL_MODULE_TAGS := optional
+LOCAL_DEX_PREOPT_APP_IMAGE := false
 ifeq ($(REMOVE_OAHL_FROM_BCP),true)
 # Previously, this JAR was included on the bootclasspath so was compiled using
 # the speed-profile. ensures that it continues to be compiled using the
