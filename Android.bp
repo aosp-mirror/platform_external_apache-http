@@ -24,10 +24,6 @@ droiddoc {
         "bouncycastle",
         "okhttp",
     ],
-    //local_sourcepaths: [
-    //    "src",
-    //    "android",
-    //],
     custom_template: "droiddoc-templates-sdk",
     api_tag_name: "APACHE_HTTP",
     api_filename: "apache-http-api.txt",
@@ -80,5 +76,13 @@ java_library_static {
     srcs: [
         ":apache-http-stubs-gen-docs",
     ],
+    product_variables: {
+        pdk: {
+            enabled: false,
+        },
+        unbundled_build: {
+            enabled: false,
+        },
+    },
     sdk_version: "21",
 }
