@@ -49,3 +49,6 @@
 # ************************************************
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/JAVA_LIBRARIES/org.apache.http.legacy_intermediates)
 $(call add-clean-step, rm -rf $(OUT_DIR)/target/common/obj/JAVA_LIBRARIES/apache-http-stubs_intermediates)
+
+# runtime lib is renamed from *.boot to *.impl
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/framework/org.apache.http.legacy.boot.jar)
