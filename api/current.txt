@@ -698,6 +698,7 @@ package org.apache.commons.logging {
     ctor public LogConfigurationException(java.lang.String);
     ctor public LogConfigurationException(java.lang.Throwable);
     ctor public LogConfigurationException(java.lang.String, java.lang.Throwable);
+    method public java.lang.Throwable getCause();
     field protected java.lang.Throwable cause;
   }
 
