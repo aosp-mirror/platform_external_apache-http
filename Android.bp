@@ -72,4 +72,7 @@ java_sdk_library {
         profile: "art-profile",
         app_image: false,
     },
+    errorprone: {
+        javacflags: ["-Xep:MissingOverride:OFF"],  // b/73499927
+    },
 }
