@@ -12,11 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-droiddoc {
-    name: "apache-http-stubs-gen-docs",
+java_sdk_library {
+    name: "org.apache.http.legacy",
     srcs: [
         "src/**/*.java",
         "android/**/*.java",
+    ],
+    api_srcs: [
         ":apache-http-stubs-sources",
     ],
     libs: [
@@ -24,65 +26,53 @@ droiddoc {
         "bouncycastle",
         "okhttp",
     ],
-    custom_template: "droiddoc-templates-sdk",
-    api_tag_name: "APACHE_HTTP",
-    api_filename: "apache-http-api.txt",
-    removed_api_filename: "apache-http-removed.txt",
-    args: "-stubpackages com.android.internal.http.multipart:" +
-          "org.apache.commons.logging:" +
-          "org.apache.commons.logging.impl:" +
-          "org.apache.commons.codec:" +
-          "org.apache.commons.codec.net:" +
-          "org.apache.commons.codec.language:" +
-          "org.apache.commons.codec.binary:" +
-          "org.apache.http.params:" +
-          "org.apache.http:" +
-          "org.apache.http.client.params:" +
-          "org.apache.http.client:" +
-          "org.apache.http.client.utils:" +
-          "org.apache.http.client.protocol:" +
-          "org.apache.http.client.methods:" +
-          "org.apache.http.client.entity:" +
-          "org.apache.http.protocol:" +
-          "org.apache.http.impl:" +
-          "org.apache.http.impl.client:" +
-          "org.apache.http.impl.auth:" +
-          "org.apache.http.impl.cookie:" +
-          "org.apache.http.impl.entity:" +
-          "org.apache.http.impl.io:" +
-          "org.apache.http.impl.conn:" +
-          "org.apache.http.impl.conn.tsccm:" +
-          "org.apache.http.message:" +
-          "org.apache.http.auth.params:" +
-          "org.apache.http.auth:" +
-          "org.apache.http.cookie.params:" +
-          "org.apache.http.cookie:" +
-          "org.apache.http.util:" +
-          "org.apache.http.entity:" +
-          "org.apache.http.io:" +
-          "org.apache.http.conn.params:" +
-          "org.apache.http.conn:" +
-          "org.apache.http.conn.routing:" +
-          "org.apache.http.conn.scheme:" +
-          "org.apache.http.conn.util:" +
-          "android.net.compatibility:" +
-          "android.net.http -nodocs",
-    sdk_version: "21",
-    installable: false,
-}
-
-java_library_static {
-    name: "org.apache.http.legacy",
-    srcs: [
-        ":apache-http-stubs-gen-docs",
+    api_packages: [
+          "android.net.compatibility",
+          "android.net.http",
+          "com.android.internal.http.multipart",
+          "org.apache.commons.codec",
+          "org.apache.commons.codec.binary",
+          "org.apache.commons.codec.language",
+          "org.apache.commons.codec.net",
+          "org.apache.commons.logging",
+          "org.apache.commons.logging.impl",
+          "org.apache.http",
+          "org.apache.http.auth",
+          "org.apache.http.auth.params",
+          "org.apache.http.client",
+          "org.apache.http.client.entity",
+          "org.apache.http.client.methods",
+          "org.apache.http.client.params",
+          "org.apache.http.client.protocol",
+          "org.apache.http.client.utils",
+          "org.apache.http.conn",
+          "org.apache.http.conn.params",
+          "org.apache.http.conn.routing",
+          "org.apache.http.conn.scheme",
+          "org.apache.http.conn.util",
+          "org.apache.http.cookie",
+          "org.apache.http.cookie.params",
+          "org.apache.http.entity",
+          "org.apache.http.impl",
+          "org.apache.http.impl.auth",
+          "org.apache.http.impl.client",
+          "org.apache.http.impl.conn",
+          "org.apache.http.impl.conn.tsccm",
+          "org.apache.http.impl.cookie",
+          "org.apache.http.impl.entity",
+          "org.apache.http.impl.io",
+          "org.apache.http.io",
+          "org.apache.http.message",
+          "org.apache.http.params",
+          "org.apache.http.protocol",
+          "org.apache.http.util",
     ],
-    product_variables: {
-        pdk: {
-            enabled: false,
-        },
-        unbundled_build: {
-            enabled: false,
-        },
+    hidden_api_packages: ["com.android.okhttp"],
+    dex_preopt: {
+        profile: "art-profile",
+        app_image: false,
     },
-    sdk_version: "21",
+    errorprone: {
+        javacflags: ["-Xep:MissingOverride:OFF"],  // b/73499927
+    },
 }
