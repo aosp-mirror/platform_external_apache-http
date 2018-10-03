@@ -24,7 +24,6 @@ java_sdk_library {
     libs: [
         "conscrypt",
         "bouncycastle",
-        "okhttp",
     ],
     api_packages: [
           "android.net.compatibility",
