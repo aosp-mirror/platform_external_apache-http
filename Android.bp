@@ -21,10 +21,6 @@ java_sdk_library {
     api_srcs: [
         ":apache-http-stubs-sources",
     ],
-    libs: [
-        "conscrypt",
-        "bouncycastle",
-    ],
     api_packages: [
           "android.net.compatibility",
           "android.net.http",
