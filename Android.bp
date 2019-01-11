@@ -69,5 +69,5 @@ java_sdk_library {
     errorprone: {
         javacflags: ["-Xep:MissingOverride:OFF"],  // b/73499927
     },
-    metalava_enabled: false,
+    droiddoc_options: ["--hide ReferencesHidden"]
 }
