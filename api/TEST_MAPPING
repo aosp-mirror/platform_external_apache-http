@@ -1,0 +1,13 @@
+{
+  "presubmit": [
+    {
+      "name": "CtsApacheHttpLegacy27ApiSignatureTestCases"
+    },
+    {
+      "name": "CtsApacheHttpLegacyCurrentApiSignatureTestCases"
+    },
+    {
+      "name": "CtsApacheHttpLegacyUsesLibraryApiSignatureTestCases"
+    }
+  ]
+}
