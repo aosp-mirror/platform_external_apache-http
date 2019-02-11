@@ -273,48 +273,6 @@ package android.net.http {
     method public void stopTiming();
   }
 
-  public class SslCertificate {
-    ctor @Deprecated public SslCertificate(String, String, String, String);
-    ctor @Deprecated public SslCertificate(String, String, java.util.Date, java.util.Date);
-    ctor public SslCertificate(java.security.cert.X509Certificate);
-    method public android.net.http.SslCertificate.DName getIssuedBy();
-    method public android.net.http.SslCertificate.DName getIssuedTo();
-    method @Deprecated public String getValidNotAfter();
-    method public java.util.Date getValidNotAfterDate();
-    method @Deprecated public String getValidNotBefore();
-    method public java.util.Date getValidNotBeforeDate();
-    method public java.security.cert.X509Certificate getX509Certificate();
-    method public static android.net.http.SslCertificate restoreState(android.os.Bundle);
-    method public static android.os.Bundle saveState(android.net.http.SslCertificate);
-  }
-
-  public class SslCertificate.DName {
-    ctor public SslCertificate.DName(String);
-    method public String getCName();
-    method public String getDName();
-    method public String getOName();
-    method public String getUName();
-  }
-
-  public class SslError {
-    ctor @Deprecated public SslError(int, android.net.http.SslCertificate);
-    ctor @Deprecated public SslError(int, java.security.cert.X509Certificate);
-    ctor public SslError(int, android.net.http.SslCertificate, String);
-    ctor public SslError(int, java.security.cert.X509Certificate, String);
-    method public boolean addError(int);
-    method public android.net.http.SslCertificate getCertificate();
-    method public int getPrimaryError();
-    method public String getUrl();
-    method public boolean hasError(int);
-    field public static final int SSL_DATE_INVALID = 4; // 0x4
-    field public static final int SSL_EXPIRED = 1; // 0x1
-    field public static final int SSL_IDMISMATCH = 2; // 0x2
-    field public static final int SSL_INVALID = 5; // 0x5
-    field @Deprecated public static final int SSL_MAX_ERROR = 6; // 0x6
-    field public static final int SSL_NOTYETVALID = 0; // 0x0
-    field public static final int SSL_UNTRUSTED = 3; // 0x3
-  }
-
 }
 
 package com.android.internal.http.multipart {
@@ -1700,11 +1658,6 @@ package org.apache.http.conn {
     method @Deprecated public org.apache.http.conn.ManagedClientConnection getConnection(long, java.util.concurrent.TimeUnit) throws org.apache.http.conn.ConnectionPoolTimeoutException, java.lang.InterruptedException;
   }
 
-  @Deprecated public class ConnectTimeoutException extends java.io.InterruptedIOException {
-    ctor @Deprecated public ConnectTimeoutException();
-    ctor @Deprecated public ConnectTimeoutException(String);
-  }
-
   @Deprecated public interface ConnectionKeepAliveStrategy {
     method @Deprecated public long getKeepAliveDuration(org.apache.http.HttpResponse, org.apache.http.protocol.HttpContext);
   }
@@ -1946,14 +1899,6 @@ package org.apache.http.conn.routing {
 
 package org.apache.http.conn.scheme {
 
-  @Deprecated public interface HostNameResolver {
-    method @Deprecated public java.net.InetAddress resolve(String) throws java.io.IOException;
-  }
-
-  @Deprecated public interface LayeredSocketFactory extends org.apache.http.conn.scheme.SocketFactory {
-    method @Deprecated public java.net.Socket createSocket(java.net.Socket, String, int, boolean) throws java.io.IOException, java.net.UnknownHostException;
-  }
-
   @Deprecated public final class PlainSocketFactory implements org.apache.http.conn.scheme.SocketFactory {
     ctor @Deprecated public PlainSocketFactory(org.apache.http.conn.scheme.HostNameResolver);
     ctor @Deprecated public PlainSocketFactory();
@@ -1981,12 +1926,6 @@ package org.apache.http.conn.scheme {
     method @Deprecated public org.apache.http.conn.scheme.Scheme register(org.apache.http.conn.scheme.Scheme);
     method @Deprecated public void setItems(java.util.Map<java.lang.String,org.apache.http.conn.scheme.Scheme>);
     method @Deprecated public org.apache.http.conn.scheme.Scheme unregister(String);
-  }
-
-  @Deprecated public interface SocketFactory {
-    method @Deprecated public java.net.Socket connectSocket(java.net.Socket, String, int, java.net.InetAddress, int, org.apache.http.params.HttpParams) throws org.apache.http.conn.ConnectTimeoutException, java.io.IOException, java.net.UnknownHostException;
-    method @Deprecated public java.net.Socket createSocket() throws java.io.IOException;
-    method @Deprecated public boolean isSecure(java.net.Socket) throws java.lang.IllegalArgumentException;
   }
 
 }
@@ -3807,17 +3746,6 @@ package org.apache.http.params {
     method @Deprecated public void setParameters(String[], Object);
   }
 
-  @Deprecated public interface CoreConnectionPNames {
-    field @Deprecated public static final String CONNECTION_TIMEOUT = "http.connection.timeout";
-    field @Deprecated public static final String MAX_HEADER_COUNT = "http.connection.max-header-count";
-    field @Deprecated public static final String MAX_LINE_LENGTH = "http.connection.max-line-length";
-    field @Deprecated public static final String SOCKET_BUFFER_SIZE = "http.socket.buffer-size";
-    field @Deprecated public static final String SO_LINGER = "http.socket.linger";
-    field @Deprecated public static final String SO_TIMEOUT = "http.socket.timeout";
-    field @Deprecated public static final String STALE_CONNECTION_CHECK = "http.connection.stalecheck";
-    field @Deprecated public static final String TCP_NODELAY = "http.tcp.nodelay";
-  }
-
   @Deprecated public interface CoreProtocolPNames {
     field @Deprecated public static final String HTTP_CONTENT_CHARSET = "http.protocol.content-charset";
     field @Deprecated public static final String HTTP_ELEMENT_CHARSET = "http.protocol.element-charset";
@@ -3851,38 +3779,6 @@ package org.apache.http.params {
     method @Deprecated public void setSocketBufferSize(int);
     method @Deprecated public void setStaleCheckingEnabled(boolean);
     method @Deprecated public void setTcpNoDelay(boolean);
-  }
-
-  @Deprecated public final class HttpConnectionParams implements org.apache.http.params.CoreConnectionPNames {
-    method @Deprecated public static int getConnectionTimeout(org.apache.http.params.HttpParams);
-    method @Deprecated public static int getLinger(org.apache.http.params.HttpParams);
-    method @Deprecated public static int getSoTimeout(org.apache.http.params.HttpParams);
-    method @Deprecated public static int getSocketBufferSize(org.apache.http.params.HttpParams);
-    method @Deprecated public static boolean getTcpNoDelay(org.apache.http.params.HttpParams);
-    method @Deprecated public static boolean isStaleCheckingEnabled(org.apache.http.params.HttpParams);
-    method @Deprecated public static void setConnectionTimeout(org.apache.http.params.HttpParams, int);
-    method @Deprecated public static void setLinger(org.apache.http.params.HttpParams, int);
-    method @Deprecated public static void setSoTimeout(org.apache.http.params.HttpParams, int);
-    method @Deprecated public static void setSocketBufferSize(org.apache.http.params.HttpParams, int);
-    method @Deprecated public static void setStaleCheckingEnabled(org.apache.http.params.HttpParams, boolean);
-    method @Deprecated public static void setTcpNoDelay(org.apache.http.params.HttpParams, boolean);
-  }
-
-  @Deprecated public interface HttpParams {
-    method @Deprecated public org.apache.http.params.HttpParams copy();
-    method @Deprecated public boolean getBooleanParameter(String, boolean);
-    method @Deprecated public double getDoubleParameter(String, double);
-    method @Deprecated public int getIntParameter(String, int);
-    method @Deprecated public long getLongParameter(String, long);
-    method @Deprecated public Object getParameter(String);
-    method @Deprecated public boolean isParameterFalse(String);
-    method @Deprecated public boolean isParameterTrue(String);
-    method @Deprecated public boolean removeParameter(String);
-    method @Deprecated public org.apache.http.params.HttpParams setBooleanParameter(String, boolean);
-    method @Deprecated public org.apache.http.params.HttpParams setDoubleParameter(String, double);
-    method @Deprecated public org.apache.http.params.HttpParams setIntParameter(String, int);
-    method @Deprecated public org.apache.http.params.HttpParams setLongParameter(String, long);
-    method @Deprecated public org.apache.http.params.HttpParams setParameter(String, Object);
   }
 
   @Deprecated public class HttpProtocolParamBean extends org.apache.http.params.HttpAbstractParamBean {
