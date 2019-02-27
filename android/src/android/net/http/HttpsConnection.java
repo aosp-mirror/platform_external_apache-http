@@ -18,10 +18,12 @@ package android.net.http;
 
 import android.content.Context;
 import android.util.Log;
-import com.android.org.conscrypt.Conscrypt;
+import com.android.org.conscrypt.ClientSessionContext;
 import com.android.org.conscrypt.FileClientSessionCache;
-import com.android.org.conscrypt.OpenSSLContextImpl;
 import com.android.org.conscrypt.SSLClientSessionCache;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import javax.net.ssl.SSLContext;
 import org.apache.http.Header;
 import org.apache.http.HttpException;
 import org.apache.http.HttpHost;
@@ -76,7 +78,7 @@ public class HttpsConnection extends Connection {
                 cache = FileClientSessionCache.usingDirectory(sessionDir);
             }
 
-            OpenSSLContextImpl sslContext =  (OpenSSLContextImpl) Conscrypt.newPreferredSSLContextSpi();
+            SSLContext sslContext = SSLContext.getInstance("TLS", "AndroidOpenSSL");
 
             // here, trust managers is a single trust-all manager
             TrustManager[] trustManagers = new TrustManager[] {
@@ -95,13 +97,13 @@ public class HttpsConnection extends Connection {
                 }
             };
 
-            sslContext.engineInit(null, trustManagers, null);
-            sslContext.engineGetClientSessionContext().setPersistentCache(cache);
+            sslContext.init(null, trustManagers, null);
+            ((ClientSessionContext) sslContext.getClientSessionContext()).setPersistentCache(cache);
 
             synchronized (HttpsConnection.class) {
-                mSslSocketFactory = sslContext.engineGetSocketFactory();
+                mSslSocketFactory = sslContext.getSocketFactory();
             }
-        } catch (KeyManagementException e) {
+        } catch (KeyManagementException | NoSuchAlgorithmException | NoSuchProviderException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
