@@ -69,5 +69,13 @@ java_sdk_library {
     errorprone: {
         javacflags: ["-Xep:MissingOverride:OFF"], // b/73499927
     },
-    droiddoc_options: ["--hide ReferencesHidden"]
+    // Add dependencies on files used by droiddoc_options.
+    droiddoc_option_files: [":frameworks-base-api-current.txt"],
+    droiddoc_options: [
+        "--hide ReferencesHidden",
+        // Subtract classes from the API .txt / stubs that are in the public SDK API. Without this
+        // the org.apache.http.legacy.jar would contain duplicates of classes in android.jar.
+        // See http://b/119021844 for more details.
+        "--subtract-api $(location :frameworks-base-api-current.txt)",
+    ],
 }
