@@ -79,3 +79,16 @@ java_sdk_library {
         "--subtract-api $(location :frameworks-base-api-current.txt)",
     ],
 }
+
+// Make the current.txt available for use by the cts/tests/signature tests.
+// ========================================================================
+genrule {
+    name: "apache-http-legacy-current.txt",
+    srcs: [
+        "api/current.txt",
+    ],
+    out: [
+        "apache-http-legacy-current.txt",
+    ],
+    cmd: "cp $(in) $(out)",
+}
