@@ -82,13 +82,9 @@ java_sdk_library {
 
 // Make the current.txt available for use by the cts/tests/signature tests.
 // ========================================================================
-genrule {
+filegroup {
     name: "apache-http-legacy-current.txt",
     srcs: [
         "api/current.txt",
     ],
-    out: [
-        "apache-http-legacy-current.txt",
-    ],
-    cmd: "cp $(in) $(out)",
 }
