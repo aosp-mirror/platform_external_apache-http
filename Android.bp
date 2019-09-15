@@ -12,11 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+filegroup {
+    name: "org.apache.http.legacy.sources",
+    srcs: ["src/**/*.java"],
+    path: "src",
+    visibility: ["//visibility:private"],
+}
+
+filegroup {
+    name: "org.apache.http.legacy.android.sources",
+    srcs: ["android/src/**/*.java"],
+    path: "android/src",
+    visibility: ["//visibility:private"],
+}
+
 java_sdk_library {
     name: "org.apache.http.legacy",
     srcs: [
-        "src/**/*.java",
-        "android/**/*.java",
+        ":org.apache.http.legacy.sources",
+        ":org.apache.http.legacy.android.sources",
     ],
     api_srcs: [
         ":apache-http-stubs-sources",
