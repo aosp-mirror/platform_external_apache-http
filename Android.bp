@@ -32,9 +32,6 @@ java_sdk_library {
         ":org.apache.http.legacy.sources",
         ":org.apache.http.legacy.android.sources",
     ],
-    api_srcs: [
-        ":apache-http-stubs-sources",
-    ],
     api_packages: [
         "android.net.compatibility",
         "android.net.http",
