@@ -12,25 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-filegroup {
-    name: "org.apache.http.legacy.sources",
-    srcs: ["src/**/*.java"],
-    path: "src",
-    visibility: ["//visibility:private"],
-}
-
-filegroup {
-    name: "org.apache.http.legacy.android.sources",
-    srcs: ["android/src/**/*.java"],
-    path: "android/src",
-    visibility: ["//visibility:private"],
-}
-
 java_sdk_library {
     name: "org.apache.http.legacy",
     srcs: [
-        ":org.apache.http.legacy.sources",
-        ":org.apache.http.legacy.android.sources",
+        "src/**/*.java",
+        "android/**/*.java",
+    ],
+    api_srcs: [
+        ":apache-http-stubs-sources",
     ],
     api_packages: [
         "android.net.compatibility",
@@ -88,14 +77,5 @@ java_sdk_library {
         // the org.apache.http.legacy.jar would contain duplicates of classes in android.jar.
         // See http://b/119021844 for more details.
         "--subtract-api $(location :frameworks-base-api-current.txt)",
-    ],
-}
-
-// Make the current.txt available for use by the cts/tests/signature tests.
-// ========================================================================
-filegroup {
-    name: "apache-http-legacy-current.txt",
-    srcs: [
-        "api/current.txt",
     ],
 }
