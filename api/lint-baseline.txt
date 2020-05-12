@@ -1,0 +1,47 @@
+// Baseline format: 1.0
+GenericException: android.net.http.AndroidHttpClient#finalize():
+    Methods must not throw generic exceptions (`java.lang.Throwable`)
+GenericException: org.apache.http.impl.conn.SingleClientConnManager#finalize():
+    Methods must not throw generic exceptions (`java.lang.Throwable`)
+GenericException: org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager#finalize():
+    Methods must not throw generic exceptions (`java.lang.Throwable`)
+
+
+MissingNullability: org.apache.commons.logging.LogConfigurationException#getCause():
+    Missing nullability on method `getCause` return
+MissingNullability: org.apache.commons.logging.impl.WeakHashtable#containsKey(Object) parameter #0:
+    Missing nullability on parameter `key` in method `containsKey`
+MissingNullability: org.apache.http.conn.EofSensorInputStream#read(byte[]) parameter #0:
+    Missing nullability on parameter `b` in method `read`
+MissingNullability: org.apache.http.conn.EofSensorInputStream#read(byte[], int, int) parameter #0:
+    Missing nullability on parameter `b` in method `read`
+MissingNullability: org.apache.http.impl.io.ChunkedInputStream#read(byte[]) parameter #0:
+    Missing nullability on parameter `b` in method `read`
+MissingNullability: org.apache.http.impl.io.ChunkedInputStream#read(byte[], int, int) parameter #0:
+    Missing nullability on parameter `b` in method `read`
+MissingNullability: org.apache.http.impl.io.ChunkedOutputStream#write(byte[]) parameter #0:
+    Missing nullability on parameter `b` in method `write`
+MissingNullability: org.apache.http.impl.io.ChunkedOutputStream#write(byte[], int, int) parameter #0:
+    Missing nullability on parameter `src` in method `write`
+MissingNullability: org.apache.http.impl.io.ContentLengthInputStream#read(byte[]) parameter #0:
+    Missing nullability on parameter `b` in method `read`
+MissingNullability: org.apache.http.impl.io.ContentLengthInputStream#read(byte[], int, int) parameter #0:
+    Missing nullability on parameter `b` in method `read`
+MissingNullability: org.apache.http.impl.io.ContentLengthOutputStream#write(byte[]) parameter #0:
+    Missing nullability on parameter `b` in method `write`
+MissingNullability: org.apache.http.impl.io.ContentLengthOutputStream#write(byte[], int, int) parameter #0:
+    Missing nullability on parameter `b` in method `write`
+MissingNullability: org.apache.http.impl.io.IdentityInputStream#read(byte[], int, int) parameter #0:
+    Missing nullability on parameter `b` in method `read`
+MissingNullability: org.apache.http.impl.io.IdentityOutputStream#write(byte[]) parameter #0:
+    Missing nullability on parameter `b` in method `write`
+MissingNullability: org.apache.http.impl.io.IdentityOutputStream#write(byte[], int, int) parameter #0:
+    Missing nullability on parameter `b` in method `write`
+
+
+ProtectedMember: org.apache.commons.logging.impl.WeakHashtable#rehash():
+    Protected methods not allowed; must be public: method org.apache.commons.logging.impl.WeakHashtable.rehash()}
+
+
+VisiblySynchronized: android.net.http.HttpsConnection#toString():
+    Internal locks must not be exposed: method android.net.http.HttpsConnection.toString()
