@@ -36,7 +36,7 @@ import org.apache.http.protocol.ExecutionContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.BasicHttpContext;
 
-abstract class Connection {
+public abstract class Connection {
 
     /**
      * Allow a TCP connection 60 idle seconds before erroring out
@@ -52,7 +52,7 @@ abstract class Connection {
     Context mContext;
 
     /** The low level connection */
-    protected AndroidHttpClientConnection mHttpClientConnection = null;
+    AndroidHttpClientConnection mHttpClientConnection = null;
 
     /**
      * The server SSL certificate associated with this connection
@@ -60,7 +60,7 @@ abstract class Connection {
      * It would be nice to store the whole certificate chain, but
      * we want to keep things as light-weight as possible
      */
-    protected SslCertificate mCertificate = null;
+    SslCertificate mCertificate = null;
 
     /**
      * The host this connection is connected to.  If using proxy,
@@ -98,7 +98,7 @@ abstract class Connection {
      */
     private byte[] mBuf;
 
-    protected Connection(Context context, HttpHost host,
+    Connection(Context context, HttpHost host,
                          RequestFeeder requestFeeder) {
         mContext = context;
         mHost = host;
