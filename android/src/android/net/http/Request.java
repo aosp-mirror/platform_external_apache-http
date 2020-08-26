@@ -44,7 +44,7 @@ import org.apache.http.protocol.RequestContent;
  * Represents an HTTP request for a given host.
  */
 
-class Request {
+public class Request {
 
     /** The eventhandler to call as the request progresses */
     EventHandler mEventHandler;
@@ -503,7 +503,7 @@ class Request {
      * Handles SSL error(s) on the way down from the user (the user
      * has already provided their feedback).
      */
-    public void handleSslErrorResponse(boolean proceed) {
+    void handleSslErrorResponse(boolean proceed) {
         HttpsConnection connection = (HttpsConnection)(mConnection);
         if (connection != null) {
             connection.restartConnection(proceed);
