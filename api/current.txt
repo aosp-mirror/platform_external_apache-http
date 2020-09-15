@@ -72,6 +72,9 @@ package android.net.http {
     method public static android.net.http.SslError verifyServerCertificates(byte[][], String, String) throws java.io.IOException;
   }
 
+  public abstract class Connection {
+  }
+
   public class DelegatingSSLSession implements javax.net.ssl.SSLSession {
     ctor protected DelegatingSSLSession();
     method public int getApplicationBufferSize();
@@ -217,7 +220,7 @@ package android.net.http {
     field public static final int UNKNOWN = 0; // 0x0
   }
 
-  public class HttpsConnection {
+  public class HttpsConnection extends android.net.http.Connection {
     method public static void initializeEngine(java.io.File);
   }
 
@@ -232,6 +235,9 @@ package android.net.http {
     method public void locationChanged(String, boolean);
     method public void requestSent();
     method public void status(int, int, int, String);
+  }
+
+  public class Request {
   }
 
   public class RequestHandle {
