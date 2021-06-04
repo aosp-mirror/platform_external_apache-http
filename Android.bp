@@ -105,6 +105,7 @@ java_sdk_library {
         // See http://b/119021844 for more details.
         "--subtract-api $(location :frameworks-base-api-current.txt)",
     ],
+    dist_group: "android",
 }
 
 // Make the current.txt available for use by the cts/tests/signature tests.
