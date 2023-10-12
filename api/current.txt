@@ -1,6 +1,4 @@
 // Signature format: 2.0
-// - add-additional-overrides=no
-// - migrating=Migration in progress see b/299366704
 package android.net.compatibility {
 
   public class WebAddress {
@@ -1229,7 +1227,10 @@ package org.apache.http.auth {
 
   @Deprecated public final class BasicUserPrincipal implements java.security.Principal {
     ctor @Deprecated public BasicUserPrincipal(String);
+    method @Deprecated public boolean equals(Object);
     method @Deprecated public String getName();
+    method @Deprecated public int hashCode();
+    method @Deprecated public String toString();
   }
 
   @Deprecated public interface Credentials {
@@ -1261,9 +1262,12 @@ package org.apache.http.auth {
 
   @Deprecated public class NTUserPrincipal implements java.security.Principal {
     ctor @Deprecated public NTUserPrincipal(String, String);
+    method @Deprecated public boolean equals(Object);
     method @Deprecated public String getDomain();
     method @Deprecated public String getName();
     method @Deprecated public String getUsername();
+    method @Deprecated public int hashCode();
+    method @Deprecated public String toString();
   }
 
   @Deprecated public class UsernamePasswordCredentials implements org.apache.http.auth.Credentials {
