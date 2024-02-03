@@ -108,11 +108,19 @@ java_sdk_library {
     dist_group: "android",
 }
 
-// Make the current.txt available for use by the cts/tests/signature tests.
+// Make the current.txt available for use by the cts/tests/signature and /vendor tests.
 // ========================================================================
 filegroup {
     name: "apache-http-legacy-current.txt",
     srcs: [
         "api/current.txt",
+    ],
+}
+
+// Make the system-current.txt available for use by the /vendor tests.
+filegroup {
+    name: "apache-http-legacy-system-current.txt",
+    srcs: [
+        "api/system-current.txt",
     ],
 }
