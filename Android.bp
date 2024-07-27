@@ -106,6 +106,7 @@ java_sdk_library {
         "--subtract-api $(location :frameworks-base-api-current.txt)",
     ],
     dist_group: "android",
+    default_to_stubs: true,
 }
 
 // Make the current.txt available for use by the cts/tests/signature and /vendor tests.
